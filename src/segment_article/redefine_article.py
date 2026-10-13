@@ -2,6 +2,7 @@ import ast
 import re
 from collections import OrderedDict
 from itertools import pairwise
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import requests
@@ -19,7 +20,8 @@ class RedefineArticle:
             max_paragraph_gap: int | None = 5,
             add_zoning: bool = False,
             xzwh_zoning: bool = True,
-            clean_up=True, 
+            clean_up=True,
+            alto_cache_dir: str | Path | None = None,
             **kwargs
         ):
 
@@ -41,6 +43,7 @@ class RedefineArticle:
         self.clean_up = clean_up
         self.xzwh_zoning = xzwh_zoning
         self.segment_page_kwargs = kwargs
+        self.alto_cache_dir = alto_cache_dir
 
         self.zoning : list[pd.DataFrame] = []
         self.page_block_filter : dict|None = None
@@ -174,6 +177,7 @@ class RedefineArticle:
                 block_filter=block_ids,
                 zone_filter=self.page_zones.get(page_id),
                 clean_up=self.clean_up,
+                alto_cache_dir=self.alto_cache_dir,
                 **self.segment_page_kwargs
             )
             lines_df = self._segment_page.segment()

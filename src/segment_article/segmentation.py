@@ -1,16 +1,15 @@
 import re
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any
+from collections.abc import Mapping, Sequence
 
 import pandas as pd
 import numpy as np
 import requests
 import validators
 from lxml import etree
-from segment_article.helpers import zscore
+from .helpers import zscore
 # from shapely.geometry import LineString
-
-ALTO_CACHE_DIR = Path(__file__).parent.parent / "alto_cache"
 
 class SegmentPage:
     """
@@ -40,7 +39,7 @@ class SegmentPage:
             keep_styles: bool = True,
             clean_up: bool = True,
             use_alto_cache: bool = False,
-            alto_cache_dir: str | Path = ALTO_CACHE_DIR,
+            alto_cache_dir: str | Path | None=None,
         ) -> None:
         """
         Initialize the segmentation object from an ALTO XML source.
@@ -87,7 +86,7 @@ class SegmentPage:
         self.keep_styles = keep_styles
         self.clean_up = clean_up
         self.use_alto_cache = use_alto_cache
-        self.alto_cache_dir = alto_cache_dir
+        self.alto_cache_dir = Path(alto_cache_dir) if alto_cache_dir is not None else None
 
         self.alto_xml_tree = self.load_alto_xml(alto_xml_tree)
         self.nsmap = self.alto_xml_tree.nsmap
@@ -358,7 +357,7 @@ class SegmentPage:
         else:
             raise ValueError(f"Invalid ALTO XML path or URL: {alto_xml_path}")
 
-        if use_cache:
+        if use_cache and self.alto_cache_dir:
             alto_id = alto_url.split("urn=")[-1].replace(":", "_") + ".xml"
             alto_cache_path = Path(self.alto_cache_dir) / alto_id
             if alto_cache_path.is_file():
@@ -368,7 +367,7 @@ class SegmentPage:
         response.raise_for_status()
         alto_xml_tree = etree.fromstring(response.content)
 
-        if use_cache:
+        if use_cache and self.alto_cache_dir and alto_cache_path:
             alto_cache_path.write_bytes(response.content)
 
         return alto_xml_tree
