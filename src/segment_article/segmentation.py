@@ -67,10 +67,15 @@ class SegmentPage:
                 due to low horizontal distance variations.
             paragraph_single_line_split: Whether a block containing a single line should trigger a 
                 new paragraph. Single blocks could be headers or titles.
+            keep_styles: Whether to retain text and paragraph style information. Doing this
+                can be useful for further analysis or processing of the segmented text.
+                However, this causes overhead in terms of memory and processing time.
             clean_up: Whether to apply cleanup steps during segmentation.
             use_alto_cache: Whether to check for an existing ALTO XML file, if a url
                 or page identifier is provided, and use it if available. If not 
                 available, the ALTO XML will be downloaded and cached for future use.
+            alto_cache_dir: Directory path to store or retrieve cached ALTO XML files. This is used
+                in combination with `use_alto_cache`.
         """
         self.alto_xml_input = alto_xml_tree
         self.block_filter = list(block_filter or [])
