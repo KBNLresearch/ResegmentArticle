@@ -47,7 +47,7 @@ class SegmentPage:
             article_split_threshold: float = 1.7,
             article_single_line_split: bool = True,
             merge_single_line_article_to_next: bool = True,
-            ignore_blocks: bool = False,
+            ignore_blocks: bool = True,
             article_gap_outlier_cutoff: float = 30,
             paragraph_split_threshold_z: float = 1,
             paragraph_split_threshold_r: float = 0.02,
@@ -77,9 +77,9 @@ class SegmentPage:
                 merged with the next article. Usually these lines are headers or titles.
             article_gap_outlier_cutoff: Vertical gaps above this value (ALTO units) always start
                 a new article and are excluded from the gap z-score.
-            ignore_blocks: Segment articles on line spacing across the whole page, ignoring
-                block boundaries (also disables the logical flow, same column and single
-                line rules, which are block-based).
+            ignore_blocks: Segment articles on line spacing across the whole page, instead of
+                per-block If set to False, at least each block (in the same column) is treated 
+                as an hard article split, before finding other splits.
             paragraph_split_threshold_z: Z-score threshold used to detect paragraph start 
                 positions (z-score is based on relative horizontal distance of a line 
                 to the text block boundary). Used in combination with `paragraph_split_threshold_r`,
@@ -496,8 +496,10 @@ class SegmentPage:
             df, hpos_pct_diff.where(~outliers), group_columns
         )
 
-        df["hpos_pct_diff"] = hpos_pct_diff
-        df["hpos_z"] = hpos_z
+        # Add for debugging purposes: horizontal position percentage difference and z-score
+        if not self.clean_up:
+            df["hpos_pct_diff"] = hpos_pct_diff
+            df["hpos_z"] = hpos_z
 
         paragraph_indent = (
             (hpos_z >= self.paragraph_split_threshold_z)
@@ -590,6 +592,7 @@ class SegmentPage:
         alto_xml_tree = etree.fromstring(response.content)
 
         if use_cache and self.alto_cache_dir and alto_cache_path:
+            alto_cache_path.parent.mkdir(parents=True, exist_ok=True)
             alto_cache_path.write_bytes(response.content)
 
         return alto_xml_tree

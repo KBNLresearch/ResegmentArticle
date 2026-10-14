@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+	<responseDate>2026-10-14T15:07:14.345Z</responseDate>
+	<request verb="GetRecord" metadataPrefix="didl" >https://services.kb.nl/mdo/oai</request>
+	<GetRecord>
+		<record>
+			<header>
+				<identifier>DDD:ddd:000022499:mpeg21</identifier>
+				<datestamp>2021-01-06T17:03:47.019Z</datestamp>
+				<setSpec>DDD</setSpec>
+			</header>
+			<metadata>
+<didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:ddd="http://www.kb.nl/namespaces/ddd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dcx="http://krait.kb.nl/coop/tel/handbook/telterms.html" xmlns:didmodel="urn:mpeg:mpeg21:2002:02-DIDMODEL-NS" xmlns:srw_dc="info:srw/schema/1/dc-v1.1">
+				<didl:Item dc:identifier="ddd:000022499:mpeg21">
+					<didl:Component dc:identifier="ddd:000022499:mpeg21:metadata">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+						</didl:Descriptor>
+						<didl:Resource mimeType="text/xml">
+							<srw_dc:dcx>
+								<dc:title>Dagblad van Zuidholland en 's Gravenhage</dc:title>
+								<dc:identifier xsi:type="dcx:PPN">832866024</dc:identifier>
+								<dcterms:alternative>Eerder verschenen onder de naam Dagblad van 's Gravenhage</dcterms:alternative>
+								<dcterms:isVersionOf>Dagblad van 's Gravenhage</dcterms:isVersionOf>
+								<dc:date>1863-08-29</dc:date>
+								<dcterms:temporal>Dag</dcterms:temporal>
+								<dcx:recordRights>Koninklijke Bibliotheek Den Haag</dcx:recordRights>
+								<dc:publisher>P.E. van Staden en Zoon</dc:publisher>
+								<dcterms:spatial>Regionaal/lokaal</dcterms:spatial>
+								<dc:source>KB C 94</dc:source>
+								<dcx:issuenumber>203</dcx:issuenumber>
+								<dcx:recordIdentifier>ddd:000022499:mpeg21</dcx:recordIdentifier>
+								<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21</dc:identifier>
+								<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								<dc:language xsi:type="dcterms:ISO639-1">nl</dc:language>
+								<dcterms:isPartOf xsi:type="dcx:collectionIdentifier">DDD</dcterms:isPartOf>
+								<dcterms:isPartOf>Databank Digitale Dagbladen</dcterms:isPartOf>
+							<ddd:yearsDigitized>1853 t/m 1869</ddd:yearsDigitized><dcterms:spatial xsi:type="dcx:creation">'s-Gravenhage</dcterms:spatial><dcterms:issued>1853-1904</dcterms:issued></srw_dc:dcx>
+						</didl:Resource>
+					</didl:Component>
+					<didl:Component dc:identifier="ddd:000022499:mpeg21:pdf">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">pdf</didl:Statement>
+						</didl:Descriptor>
+						<didl:Resource mimeType="application/pdf" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:pdf" dcx:filename="DDD_000022499.pdf" dcx:md5_checksum="1d9fa4bc299ef7d0bab4d89fb0f84d81"></didl:Resource>
+					</didl:Component>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:p001">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">page 1</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<ddd:nativePageNumber>1</ddd:nativePageNumber>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:p001</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p001</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								<ddd:OCRConfidencelevel>0.764</ddd:OCRConfidencelevel></srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:image/preservation">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image/preservation</didl:Statement>
+							</didl:Descriptor>
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="technical_targets">targetset_20080620_01</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="DDD_000022499_001.jp2" dcx:md5_checksum="a3d56a88869f0f17ced22ae345b76d9c"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:metadata/technical">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/technical</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="DDD_000022499_001_techmeta.xml" dcx:md5_checksum="416892a1ed68d98e71d5cb7ecedef90b"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:image">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p001:image" dcx:filename="DDD_000022499_001_access.jp2" dcx:md5_checksum="2d621099f8cf84818da4f32e159aa31d"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:alto">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">alto</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p001:alto" dcx:filename="DDD_000022499_001_alto.xml" dcx:md5_checksum="1cacd7da38a280e8447fd040f6b02676"></didl:Resource>
+						</didl:Component>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p001:a0001" ddd:article_id="ddd:000022499:mpeg21:a0001">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0001:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>Officieel Gedeelte.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0001</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0001</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0001:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="194" vpos="1304" width="637" height="70"></dcx:area>
+											<dcx:area hpos="64" vpos="1395" width="930" height="3748"></dcx:area>
+											<dcx:area hpos="1007" vpos="771" width="958" height="3930"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p001:a0002" ddd:article_id="ddd:000022499:mpeg21:a0002">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0002:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>Niet Officieel Gedeelte. 'sGRAVENHAGE , 28 Augustus.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0002</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0002</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0002:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="1061" vpos="4752" width="854" height="57"></dcx:area>
+											<dcx:area hpos="1195" vpos="4861" width="604" height="40"></dcx:area>
+											<dcx:area hpos="1023" vpos="4909" width="927" height="255"></dcx:area>
+											<dcx:area hpos="1982" vpos="768" width="936" height="1551"></dcx:area>
+											<dcx:area hpos="1988" vpos="2320" width="931" height="737"></dcx:area>
+											<dcx:area hpos="1981" vpos="3065" width="940" height="2097"></dcx:area>
+											<dcx:area hpos="2936" vpos="765" width="923" height="66"></dcx:area>
+											<dcx:area hpos="2937" vpos="837" width="922" height="181"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p001:a0003" ddd:article_id="ddd:000022499:mpeg21:a0003">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0003:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>BUITENLAND. DUITSCHLAND.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0003</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0003</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0003:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="3100" vpos="1059" width="592" height="40"></dcx:area>
+											<dcx:area hpos="3133" vpos="1129" width="523" height="27"></dcx:area>
+											<dcx:area hpos="2937" vpos="1165" width="921" height="182"></dcx:area>
+											<dcx:area hpos="2942" vpos="1343" width="940" height="1120"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p001:a0004" ddd:article_id="ddd:000022499:mpeg21:a0004">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0004:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>FRANKRIJK.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0004</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0004</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p001:a0004:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="3200" vpos="2478" width="423" height="28"></dcx:area>
+											<dcx:area hpos="3481" vpos="2519" width="326" height="34"></dcx:area>
+											<dcx:area hpos="3025" vpos="2558" width="474" height="34"></dcx:area>
+											<dcx:area hpos="2931" vpos="2600" width="954" height="2557"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:p002">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">page 2</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<ddd:nativePageNumber>2</ddd:nativePageNumber>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:p002</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p002</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								<ddd:OCRConfidencelevel>0.83</ddd:OCRConfidencelevel></srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:image/preservation">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image/preservation</didl:Statement>
+							</didl:Descriptor>
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="technical_targets">targetset_20080620_01</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="DDD_000022499_002.jp2" dcx:md5_checksum="03d881985024394bfb4a0415c5bbdc74"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:metadata/technical">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/technical</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="DDD_000022499_002_techmeta.xml" dcx:md5_checksum="9a5273df1ea7dc20c331d27f1b460757"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:image">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p002:image" dcx:filename="DDD_000022499_002_access.jp2" dcx:md5_checksum="c3c619965a8b9d43696c98d3b53010e7"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:alto">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">alto</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p002:alto" dcx:filename="DDD_000022499_002_alto.xml" dcx:md5_checksum="798b63f639d63ed5eb201fe8e312a8f8"></didl:Resource>
+						</didl:Component>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p002:a0001" ddd:article_id="ddd:000022499:mpeg21:a0004">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0001:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>FRANKRIJK.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0004</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0004</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0001:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="84" vpos="109" width="937" height="391"></dcx:area>
+											<dcx:area hpos="80" vpos="502" width="935" height="895"></dcx:area>
+											<dcx:area hpos="71" vpos="1422" width="951" height="2818"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p002:a0002" ddd:article_id="ddd:000022499:mpeg21:a0005">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0002:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>ITALIE.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0005</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0005</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0002:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="428" vpos="4251" width="267" height="28"></dcx:area>
+											<dcx:area hpos="79" vpos="4302" width="949" height="870"></dcx:area>
+											<dcx:area hpos="1049" vpos="112" width="924" height="215"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p002:a0003" ddd:article_id="ddd:000022499:mpeg21:a0006">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0003:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>TELEGRAPHISCHE BERIGTEN.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0006</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0006</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0003:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1089" vpos="389" width="848" height="67"></dcx:area>
+											<dcx:area hpos="1049" vpos="506" width="925" height="177"></dcx:area>
+											<dcx:area hpos="1050" vpos="684" width="926" height="356"></dcx:area>
+											<dcx:area hpos="1050" vpos="1041" width="925" height="141"></dcx:area>
+											<dcx:area hpos="1049" vpos="1183" width="924" height="135"></dcx:area>
+											<dcx:area hpos="1049" vpos="1326" width="924" height="67"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p002:a0004" ddd:article_id="ddd:000022499:mpeg21:a0007">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0004:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>Lalere Depeches.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0007</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0007</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0004:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1266" vpos="1436" width="521" height="45"></dcx:area>
+											<dcx:area hpos="1036" vpos="1496" width="943" height="2469"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p002:a0005" ddd:article_id="ddd:000022499:mpeg21:a0008">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0005:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>BINNENLAND. 'sGRAVENHAGE, 28 Augustus.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0008</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0008</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p002:a0005:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1209" vpos="4019" width="600" height="40"></dcx:area>
+											<dcx:area hpos="1198" vpos="4106" width="606" height="33"></dcx:area>
+											<dcx:area hpos="1051" vpos="4140" width="928" height="555"></dcx:area>
+											<dcx:area hpos="1055" vpos="4697" width="925" height="109"></dcx:area>
+											<dcx:area hpos="1052" vpos="4820" width="927" height="105"></dcx:area>
+											<dcx:area hpos="1046" vpos="4941" width="938" height="233"></dcx:area>
+											<dcx:area hpos="2007" vpos="112" width="926" height="250"></dcx:area>
+											<dcx:area hpos="2009" vpos="374" width="924" height="70"></dcx:area>
+											<dcx:area hpos="2009" vpos="456" width="928" height="213"></dcx:area>
+											<dcx:area hpos="2010" vpos="684" width="927" height="212"></dcx:area>
+											<dcx:area hpos="2011" vpos="898" width="923" height="104"></dcx:area>
+											<dcx:area hpos="2010" vpos="1005" width="923" height="106"></dcx:area>
+											<dcx:area hpos="2011" vpos="1113" width="924" height="69"></dcx:area>
+											<dcx:area hpos="2011" vpos="1196" width="927" height="274"></dcx:area>
+											<dcx:area hpos="2011" vpos="1494" width="927" height="97"></dcx:area>
+											<dcx:area hpos="2008" vpos="1615" width="930" height="285"></dcx:area>
+											<dcx:area hpos="2006" vpos="1941" width="930" height="887"></dcx:area>
+											<dcx:area hpos="2006" vpos="2828" width="933" height="644"></dcx:area>
+											<dcx:area hpos="2010" vpos="3481" width="929" height="314"></dcx:area>
+											<dcx:area hpos="2009" vpos="3810" width="930" height="287"></dcx:area>
+											<dcx:area hpos="2009" vpos="4098" width="927" height="72"></dcx:area>
+											<dcx:area hpos="2009" vpos="4183" width="930" height="471"></dcx:area>
+											<dcx:area hpos="2014" vpos="4661" width="925" height="174"></dcx:area>
+											<dcx:area hpos="2016" vpos="4835" width="922" height="327"></dcx:area>
+											<dcx:area hpos="2967" vpos="81" width="901" height="1157"></dcx:area>
+											<dcx:area hpos="2970" vpos="1245" width="896" height="796"></dcx:area>
+											<dcx:area hpos="2969" vpos="2053" width="897" height="220"></dcx:area>
+											<dcx:area hpos="2970" vpos="2285" width="896" height="427"></dcx:area>
+											<dcx:area hpos="2975" vpos="2744" width="893" height="577"></dcx:area>
+											<dcx:area hpos="2973" vpos="3330" width="900" height="1834"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:p003">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">page 3</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<ddd:nativePageNumber>3</ddd:nativePageNumber>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:p003</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p003</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								<ddd:OCRConfidencelevel>0.791</ddd:OCRConfidencelevel></srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:image/preservation">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image/preservation</didl:Statement>
+							</didl:Descriptor>
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="technical_targets">targetset_20080620_01</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="DDD_000022499_003.jp2" dcx:md5_checksum="8df85f31b66e4d5f22cb470deeb84668"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:metadata/technical">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/technical</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="DDD_000022499_003_techmeta.xml" dcx:md5_checksum="57a3391178415c77997913e77da03c4e"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:image">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p003:image" dcx:filename="DDD_000022499_003_access.jp2" dcx:md5_checksum="fcf1d1ca961f1a6baae44f5206efa6a9"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:alto">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">alto</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p003:alto" dcx:filename="DDD_000022499_003_alto.xml" dcx:md5_checksum="7011d365838266e3f74bb3dc9a9e23f6"></didl:Resource>
+						</didl:Component>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0001" ddd:article_id="ddd:000022499:mpeg21:a0008">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0001:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>BINNENLAND. 'sGRAVENHAGE, 28 Augustus.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0008</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0008</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0001:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="97" vpos="70" width="907" height="2282"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0002" ddd:article_id="ddd:000022499:mpeg21:a0009">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0002:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>Binnenlandsche Beursberigten.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0009</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0009</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0002:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="96" vpos="2370" width="891" height="132"></dcx:area>
+											<dcx:area hpos="91" vpos="2572" width="893" height="1595"></dcx:area>
+											<dcx:area hpos="209" vpos="2486" width="772" height="76"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0003" ddd:article_id="ddd:000022499:mpeg21:a0010">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0003:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>Buitenlandsche Beursberigten.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0010</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0010</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0003:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="92" vpos="4188" width="859" height="136"></dcx:area>
+											<dcx:area hpos="84" vpos="4273" width="911" height="433"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0004" ddd:article_id="ddd:000022499:mpeg21:a0011">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0004:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>RIVIERBERIGTEN.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0011</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0011</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0004:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="243" vpos="4681" width="547" height="83"></dcx:area>
+											<dcx:area hpos="83" vpos="4720" width="820" height="194"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0005" ddd:article_id="ddd:000022499:mpeg21:a0012">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0005:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>MARKT- EN HANDELSBERIGTEN.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0012</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0012</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0005:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="148" vpos="4872" width="763" height="123"></dcx:area>
+											<dcx:area hpos="80" vpos="4933" width="916" height="200"></dcx:area>
+											<dcx:area hpos="1024" vpos="97" width="937" height="950"></dcx:area>
+											<dcx:area hpos="1028" vpos="1065" width="924" height="144"></dcx:area>
+											<dcx:area hpos="1026" vpos="1209" width="927" height="178"></dcx:area>
+											<dcx:area hpos="1022" vpos="1390" width="932" height="205"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p003:a0006" ddd:article_id="ddd:000022499:mpeg21:a0013">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0006:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>KOLONIEN.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0013</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0013</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p003:a0006:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="1165" vpos="1641" width="643" height="59"></dcx:area>
+											<dcx:area hpos="1256" vpos="1722" width="444" height="36"></dcx:area>
+											<dcx:area hpos="1022" vpos="1787" width="930" height="113"></dcx:area>
+											<dcx:area hpos="1018" vpos="1902" width="932" height="1604"></dcx:area>
+											<dcx:area hpos="1018" vpos="3508" width="929" height="213"></dcx:area>
+											<dcx:area hpos="1018" vpos="3722" width="932" height="530"></dcx:area>
+											<dcx:area hpos="1020" vpos="4253" width="931" height="496"></dcx:area>
+											<dcx:area hpos="1023" vpos="4752" width="932" height="348"></dcx:area>
+											<dcx:area hpos="1030" vpos="5106" width="924" height="70"></dcx:area>
+											<dcx:area hpos="1978" vpos="97" width="933" height="3005"></dcx:area>
+											<dcx:area hpos="1980" vpos="3104" width="928" height="562"></dcx:area>
+											<dcx:area hpos="1981" vpos="3676" width="929" height="704"></dcx:area>
+											<dcx:area hpos="1983" vpos="4394" width="927" height="213"></dcx:area>
+											<dcx:area hpos="1985" vpos="4607" width="927" height="351"></dcx:area>
+											<dcx:area hpos="1985" vpos="4968" width="929" height="214"></dcx:area>
+											<dcx:area hpos="2934" vpos="93" width="928" height="636"></dcx:area>
+											<dcx:area hpos="2935" vpos="767" width="923" height="72"></dcx:area>
+											<dcx:area hpos="2935" vpos="839" width="923" height="491"></dcx:area>
+											<dcx:area hpos="2941" vpos="1337" width="919" height="329"></dcx:area>
+											<dcx:area hpos="2944" vpos="1667" width="926" height="246"></dcx:area>
+											<dcx:area hpos="2942" vpos="1919" width="928" height="712"></dcx:area>
+											<dcx:area hpos="2941" vpos="2634" width="930" height="598"></dcx:area>
+											<dcx:area hpos="2942" vpos="3239" width="925" height="65"></dcx:area>
+											<dcx:area hpos="2942" vpos="3309" width="929" height="1068"></dcx:area>
+											<dcx:area hpos="2944" vpos="4385" width="916" height="790"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:p004">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">page 4</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<ddd:nativePageNumber>4</ddd:nativePageNumber>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:p004</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p004</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								<ddd:OCRConfidencelevel>0.766</ddd:OCRConfidencelevel></srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:image/preservation">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image/preservation</didl:Statement>
+							</didl:Descriptor>
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="technical_targets">targetset_20080620_01</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="DDD_000022499_004.jp2" dcx:md5_checksum="ff712f5c1774711bb7491feece30a120"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:metadata/technical">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/technical</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="DDD_000022499_004_techmeta.xml" dcx:md5_checksum="3a76e41d941e81ee648837e7b06d4ade"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:image">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">image</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="image/jp2" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p004:image" dcx:filename="DDD_000022499_004_access.jp2" dcx:md5_checksum="b3c87d40ccc2cf68710eeeddbdb9003f"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:alto">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">alto</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:p004:alto" dcx:filename="DDD_000022499_004_alto.xml" dcx:md5_checksum="90593562119d614f79b5f86028b33b7e"></didl:Resource>
+						</didl:Component>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0001" ddd:article_id="ddd:000022499:mpeg21:a0013">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0001:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>artikel</dc:subject>
+										<dc:title>KOLONIEN.</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0013</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0013</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0001:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="110" vpos="93" width="945" height="966"></dcx:area>
+											<dcx:area hpos="120" vpos="1063" width="926" height="64"></dcx:area>
+											<dcx:area hpos="1075" vpos="97" width="961" height="1041"></dcx:area>
+											<dcx:area hpos="2037" vpos="100" width="930" height="176"></dcx:area>
+											<dcx:area hpos="2042" vpos="278" width="930" height="285"></dcx:area>
+											<dcx:area hpos="2044" vpos="563" width="933" height="569"></dcx:area>
+											<dcx:area hpos="2999" vpos="94" width="883" height="1038"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0002" ddd:article_id="ddd:000022499:mpeg21:a0014">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0002:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0014</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0014</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0002:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="188" vpos="1198" width="579" height="41"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0003" ddd:article_id="ddd:000022499:mpeg21:a0015">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0003:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0015</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0015</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0003:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="885" vpos="1192" width="748" height="1789"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0004" ddd:article_id="ddd:000022499:mpeg21:a0016">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0004:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0016</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0016</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0004:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="1137" vpos="2986" width="432" height="30"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0005" ddd:article_id="ddd:000022499:mpeg21:a0017">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0005:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0017</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0017</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0005:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="113" vpos="3050" width="1513" height="2076"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0006" ddd:article_id="ddd:000022499:mpeg21:a0018">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0006:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0018</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0018</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0006:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="852" vpos="5127" width="658" height="43"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0007" ddd:article_id="ddd:000022499:mpeg21:a0019">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0007:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0019</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0019</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0007:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="1649" vpos="1204" width="754" height="3966"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0008" ddd:article_id="ddd:000022499:mpeg21:a0020">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0008:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0020</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0020</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0008:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="2426" vpos="3009" width="744" height="2164"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0009" ddd:article_id="ddd:000022499:mpeg21:a0021">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0009:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0021</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0021</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0009:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="2411" vpos="1187" width="1470" height="1776"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0010" ddd:article_id="ddd:000022499:mpeg21:a0022">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0010:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>advertentie</dc:subject>
+										<dc:title>Advertentie</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0022</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0022</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0010:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="3176" vpos="2980" width="716" height="1890"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0011" ddd:article_id="ddd:000022499:mpeg21:a0023">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0011:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>familiebericht</dc:subject>
+										<dc:title>Familiebericht</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0023</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0023</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0011:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="116" vpos="1283" width="741" height="1356"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+						<didl:Item dc:identifier="ddd:000022499:mpeg21:p004:a0012" ddd:article_id="ddd:000022499:mpeg21:a0024">
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0012:metadata">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<srw_dc:dcx>
+										<dc:subject>familiebericht</dc:subject>
+										<dc:title>Familiebericht</dc:title>
+										<dcterms:accessRights>accessible</dcterms:accessRights>
+										<dcx:recordIdentifier>ddd:000022499:mpeg21:a0024</dcx:recordIdentifier>
+										<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0024</dc:identifier>
+										<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+									</srw_dc:dcx>
+								</didl:Resource>
+							</didl:Component>
+							<didl:Component dc:identifier="ddd:000022499:mpeg21:p004:a0012:zoning">
+								<didl:Descriptor>
+									<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+								</didl:Descriptor>
+								<didl:Resource mimeType="text/xml">
+									<dcx:zoning>
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="111" vpos="2654" width="749" height="360"></dcx:area>
+										</dcx:coordinates>
+									</dcx:zoning>
+								</didl:Resource>
+							</didl:Component>
+						</didl:Item>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0001">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 1</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0001:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0001:ocr" dcx:filename="DDD_000022499_0001_articletext.xml" dcx:md5_checksum="2a6277930272889e0f4af9c77a60e1cb"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0001:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>Officieel Gedeelte.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0001</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0001</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0001:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p001">
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="194" vpos="1304" width="637" height="70"></dcx:area>
+											<dcx:area hpos="64" vpos="1395" width="930" height="3748"></dcx:area>
+											<dcx:area hpos="1007" vpos="771" width="958" height="3930"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_001_alto.xml">
+											<dcx:TextBlock ID="P1_TB00010"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00011"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00012"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0002">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 2</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0002:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0002:ocr" dcx:filename="DDD_000022499_0002_articletext.xml" dcx:md5_checksum="28e5b62af6435a7401993d7983b58b60"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0002:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>Niet Officieel Gedeelte. 'sGRAVENHAGE , 28 Augustus.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0002</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0002</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0002:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p001">
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="1061" vpos="4752" width="854" height="57"></dcx:area>
+											<dcx:area hpos="1195" vpos="4861" width="604" height="40"></dcx:area>
+											<dcx:area hpos="1023" vpos="4909" width="927" height="255"></dcx:area>
+											<dcx:area hpos="1982" vpos="768" width="936" height="1551"></dcx:area>
+											<dcx:area hpos="1988" vpos="2320" width="931" height="737"></dcx:area>
+											<dcx:area hpos="1981" vpos="3065" width="940" height="2097"></dcx:area>
+											<dcx:area hpos="2936" vpos="765" width="923" height="66"></dcx:area>
+											<dcx:area hpos="2937" vpos="837" width="922" height="181"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_001_alto.xml">
+											<dcx:TextBlock ID="P1_TB00013"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00014"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00015"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00016"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00017"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00018"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00019"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00020"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0003">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 3</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0003:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0003:ocr" dcx:filename="DDD_000022499_0003_articletext.xml" dcx:md5_checksum="968684a8695793b7b8cebfb08b30bd74"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0003:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>BUITENLAND. DUITSCHLAND.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0003</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0003</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0003:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p001">
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="3100" vpos="1059" width="592" height="40"></dcx:area>
+											<dcx:area hpos="3133" vpos="1129" width="523" height="27"></dcx:area>
+											<dcx:area hpos="2937" vpos="1165" width="921" height="182"></dcx:area>
+											<dcx:area hpos="2942" vpos="1343" width="940" height="1120"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_001_alto.xml">
+											<dcx:TextBlock ID="P1_TB00021"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00022"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00023"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00024"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0004">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 4</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0004:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0004:ocr" dcx:filename="DDD_000022499_0004_articletext.xml" dcx:md5_checksum="40ffb6f16e86170eb050ab67939ded9b"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0004:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>FRANKRIJK.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0004</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0004</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0004:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p001">
+										<dcx:coordinates image="DDD_000022499_001_access.jp2">
+											<dcx:area hpos="3200" vpos="2478" width="423" height="28"></dcx:area>
+											<dcx:area hpos="3481" vpos="2519" width="326" height="34"></dcx:area>
+											<dcx:area hpos="3025" vpos="2558" width="474" height="34"></dcx:area>
+											<dcx:area hpos="2931" vpos="2600" width="954" height="2557"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_001_alto.xml">
+											<dcx:TextBlock ID="P1_TB00025"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00026"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00027"></dcx:TextBlock>
+											<dcx:TextBlock ID="P1_TB00028"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+									<dcx:article-part order="2" pageid="ddd:000022499:mpeg21:p002">
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="84" vpos="109" width="937" height="391"></dcx:area>
+											<dcx:area hpos="80" vpos="502" width="935" height="895"></dcx:area>
+											<dcx:area hpos="71" vpos="1422" width="951" height="2818"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_002_alto.xml">
+											<dcx:TextBlock ID="P2_TB00001"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00002"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00003"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0005">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 5</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0005:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0005:ocr" dcx:filename="DDD_000022499_0005_articletext.xml" dcx:md5_checksum="c46f0ea1dde39a6fcae8d913019c0b3c"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0005:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>ITALIE.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0005</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0005</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0005:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p002">
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="428" vpos="4251" width="267" height="28"></dcx:area>
+											<dcx:area hpos="79" vpos="4302" width="949" height="870"></dcx:area>
+											<dcx:area hpos="1049" vpos="112" width="924" height="215"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_002_alto.xml">
+											<dcx:TextBlock ID="P2_TB00004"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00005"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00006"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0006">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 6</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0006:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0006:ocr" dcx:filename="DDD_000022499_0006_articletext.xml" dcx:md5_checksum="edead1ea6307ec7a59e0e997a0b52610"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0006:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>TELEGRAPHISCHE BERIGTEN.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0006</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0006</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0006:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p002">
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1089" vpos="389" width="848" height="67"></dcx:area>
+											<dcx:area hpos="1049" vpos="506" width="925" height="177"></dcx:area>
+											<dcx:area hpos="1050" vpos="684" width="926" height="356"></dcx:area>
+											<dcx:area hpos="1050" vpos="1041" width="925" height="141"></dcx:area>
+											<dcx:area hpos="1049" vpos="1183" width="924" height="135"></dcx:area>
+											<dcx:area hpos="1049" vpos="1326" width="924" height="67"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_002_alto.xml">
+											<dcx:TextBlock ID="P2_TB00007"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00008"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00009"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00010"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00011"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00012"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0007">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 7</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0007:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0007:ocr" dcx:filename="DDD_000022499_0007_articletext.xml" dcx:md5_checksum="bcf9599cb3719690cc5a386248c858f5"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0007:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>Lalere Depeches.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0007</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0007</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0007:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p002">
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1266" vpos="1436" width="521" height="45"></dcx:area>
+											<dcx:area hpos="1036" vpos="1496" width="943" height="2469"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_002_alto.xml">
+											<dcx:TextBlock ID="P2_TB00013"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00014"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0008">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 8</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0008:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0008:ocr" dcx:filename="DDD_000022499_0008_articletext.xml" dcx:md5_checksum="0d3dd12d312ddb63ba07ca7f9d4dd186"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0008:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>BINNENLAND. 'sGRAVENHAGE, 28 Augustus.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0008</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0008</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0008:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p002">
+										<dcx:coordinates image="DDD_000022499_002_access.jp2">
+											<dcx:area hpos="1209" vpos="4019" width="600" height="40"></dcx:area>
+											<dcx:area hpos="1198" vpos="4106" width="606" height="33"></dcx:area>
+											<dcx:area hpos="1051" vpos="4140" width="928" height="555"></dcx:area>
+											<dcx:area hpos="1055" vpos="4697" width="925" height="109"></dcx:area>
+											<dcx:area hpos="1052" vpos="4820" width="927" height="105"></dcx:area>
+											<dcx:area hpos="1046" vpos="4941" width="938" height="233"></dcx:area>
+											<dcx:area hpos="2007" vpos="112" width="926" height="250"></dcx:area>
+											<dcx:area hpos="2009" vpos="374" width="924" height="70"></dcx:area>
+											<dcx:area hpos="2009" vpos="456" width="928" height="213"></dcx:area>
+											<dcx:area hpos="2010" vpos="684" width="927" height="212"></dcx:area>
+											<dcx:area hpos="2011" vpos="898" width="923" height="104"></dcx:area>
+											<dcx:area hpos="2010" vpos="1005" width="923" height="106"></dcx:area>
+											<dcx:area hpos="2011" vpos="1113" width="924" height="69"></dcx:area>
+											<dcx:area hpos="2011" vpos="1196" width="927" height="274"></dcx:area>
+											<dcx:area hpos="2011" vpos="1494" width="927" height="97"></dcx:area>
+											<dcx:area hpos="2008" vpos="1615" width="930" height="285"></dcx:area>
+											<dcx:area hpos="2006" vpos="1941" width="930" height="887"></dcx:area>
+											<dcx:area hpos="2006" vpos="2828" width="933" height="644"></dcx:area>
+											<dcx:area hpos="2010" vpos="3481" width="929" height="314"></dcx:area>
+											<dcx:area hpos="2009" vpos="3810" width="930" height="287"></dcx:area>
+											<dcx:area hpos="2009" vpos="4098" width="927" height="72"></dcx:area>
+											<dcx:area hpos="2009" vpos="4183" width="930" height="471"></dcx:area>
+											<dcx:area hpos="2014" vpos="4661" width="925" height="174"></dcx:area>
+											<dcx:area hpos="2016" vpos="4835" width="922" height="327"></dcx:area>
+											<dcx:area hpos="2967" vpos="81" width="901" height="1157"></dcx:area>
+											<dcx:area hpos="2970" vpos="1245" width="896" height="796"></dcx:area>
+											<dcx:area hpos="2969" vpos="2053" width="897" height="220"></dcx:area>
+											<dcx:area hpos="2970" vpos="2285" width="896" height="427"></dcx:area>
+											<dcx:area hpos="2975" vpos="2744" width="893" height="577"></dcx:area>
+											<dcx:area hpos="2973" vpos="3330" width="900" height="1834"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_002_alto.xml">
+											<dcx:TextBlock ID="P2_TB00015"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00016"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00017"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00018"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00019"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00020"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00021"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00022"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00023"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00024"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00025"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00026"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00027"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00028"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00029"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00030"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00031"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00032"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00033"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00034"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00035"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00036"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00037"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00038"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00039"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00040"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00041"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00042"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00043"></dcx:TextBlock>
+											<dcx:TextBlock ID="P2_TB00044"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+									<dcx:article-part order="2" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="97" vpos="70" width="907" height="2282"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00001"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0009">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 9</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0009:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0009:ocr" dcx:filename="DDD_000022499_0009_articletext.xml" dcx:md5_checksum="5c8024883c91e18eedfa9c63e9517ecf"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0009:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>Binnenlandsche Beursberigten.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0009</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0009</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0009:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="96" vpos="2370" width="891" height="132"></dcx:area>
+											<dcx:area hpos="91" vpos="2572" width="893" height="1595"></dcx:area>
+											<dcx:area hpos="209" vpos="2486" width="772" height="76"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00002"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00003"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00004"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0010">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 10</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0010:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0010:ocr" dcx:filename="DDD_000022499_0010_articletext.xml" dcx:md5_checksum="0f2785fe8a9fb475733439a69e5d4909"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0010:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>Buitenlandsche Beursberigten.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0010</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0010</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0010:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="92" vpos="4188" width="859" height="136"></dcx:area>
+											<dcx:area hpos="84" vpos="4273" width="911" height="433"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00005"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00006"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0011">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 11</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0011:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0011:ocr" dcx:filename="DDD_000022499_0011_articletext.xml" dcx:md5_checksum="436f793c18ab7de137c267a66e690ff1"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0011:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>RIVIERBERIGTEN.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0011</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0011</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0011:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="243" vpos="4681" width="547" height="83"></dcx:area>
+											<dcx:area hpos="83" vpos="4720" width="820" height="194"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00007"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00008"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0012">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 12</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0012:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0012:ocr" dcx:filename="DDD_000022499_0012_articletext.xml" dcx:md5_checksum="d2c91c2c5ae093490f46a99b91ef144f"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0012:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>MARKT- EN HANDELSBERIGTEN.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0012</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0012</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0012:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="148" vpos="4872" width="763" height="123"></dcx:area>
+											<dcx:area hpos="80" vpos="4933" width="916" height="200"></dcx:area>
+											<dcx:area hpos="1024" vpos="97" width="937" height="950"></dcx:area>
+											<dcx:area hpos="1028" vpos="1065" width="924" height="144"></dcx:area>
+											<dcx:area hpos="1026" vpos="1209" width="927" height="178"></dcx:area>
+											<dcx:area hpos="1022" vpos="1390" width="932" height="205"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00009"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00010"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00011"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00012"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00013"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00014"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0013">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 13</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0013:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0013:ocr" dcx:filename="DDD_000022499_0013_articletext.xml" dcx:md5_checksum="b763eb889ff171195c93922aa84365ba"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0013:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>artikel</dc:subject>
+									<dc:title>KOLONIEN.</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0013</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0013</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0013:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p003">
+										<dcx:coordinates image="DDD_000022499_003_access.jp2">
+											<dcx:area hpos="1165" vpos="1641" width="643" height="59"></dcx:area>
+											<dcx:area hpos="1256" vpos="1722" width="444" height="36"></dcx:area>
+											<dcx:area hpos="1022" vpos="1787" width="930" height="113"></dcx:area>
+											<dcx:area hpos="1018" vpos="1902" width="932" height="1604"></dcx:area>
+											<dcx:area hpos="1018" vpos="3508" width="929" height="213"></dcx:area>
+											<dcx:area hpos="1018" vpos="3722" width="932" height="530"></dcx:area>
+											<dcx:area hpos="1020" vpos="4253" width="931" height="496"></dcx:area>
+											<dcx:area hpos="1023" vpos="4752" width="932" height="348"></dcx:area>
+											<dcx:area hpos="1030" vpos="5106" width="924" height="70"></dcx:area>
+											<dcx:area hpos="1978" vpos="97" width="933" height="3005"></dcx:area>
+											<dcx:area hpos="1980" vpos="3104" width="928" height="562"></dcx:area>
+											<dcx:area hpos="1981" vpos="3676" width="929" height="704"></dcx:area>
+											<dcx:area hpos="1983" vpos="4394" width="927" height="213"></dcx:area>
+											<dcx:area hpos="1985" vpos="4607" width="927" height="351"></dcx:area>
+											<dcx:area hpos="1985" vpos="4968" width="929" height="214"></dcx:area>
+											<dcx:area hpos="2934" vpos="93" width="928" height="636"></dcx:area>
+											<dcx:area hpos="2935" vpos="767" width="923" height="72"></dcx:area>
+											<dcx:area hpos="2935" vpos="839" width="923" height="491"></dcx:area>
+											<dcx:area hpos="2941" vpos="1337" width="919" height="329"></dcx:area>
+											<dcx:area hpos="2944" vpos="1667" width="926" height="246"></dcx:area>
+											<dcx:area hpos="2942" vpos="1919" width="928" height="712"></dcx:area>
+											<dcx:area hpos="2941" vpos="2634" width="930" height="598"></dcx:area>
+											<dcx:area hpos="2942" vpos="3239" width="925" height="65"></dcx:area>
+											<dcx:area hpos="2942" vpos="3309" width="929" height="1068"></dcx:area>
+											<dcx:area hpos="2944" vpos="4385" width="916" height="790"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_003_alto.xml">
+											<dcx:TextBlock ID="P3_TB00015"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00016"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00017"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00018"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00019"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00020"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00021"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00022"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00023"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00024"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00025"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00026"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00027"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00028"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00029"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00030"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00031"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00032"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00033"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00034"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00035"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00036"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00037"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00038"></dcx:TextBlock>
+											<dcx:TextBlock ID="P3_TB00039"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+									<dcx:article-part order="2" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="110" vpos="93" width="945" height="966"></dcx:area>
+											<dcx:area hpos="120" vpos="1063" width="926" height="64"></dcx:area>
+											<dcx:area hpos="1075" vpos="97" width="961" height="1041"></dcx:area>
+											<dcx:area hpos="2037" vpos="100" width="930" height="176"></dcx:area>
+											<dcx:area hpos="2042" vpos="278" width="930" height="285"></dcx:area>
+											<dcx:area hpos="2044" vpos="563" width="933" height="569"></dcx:area>
+											<dcx:area hpos="2999" vpos="94" width="883" height="1038"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00001"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00002"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00003"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00004"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00005"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00006"></dcx:TextBlock>
+											<dcx:TextBlock ID="P4_TB00007"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0014">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 14</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0014:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0014:ocr" dcx:filename="DDD_000022499_0014_articletext.xml" dcx:md5_checksum="da6eb577fd099d1d962e08e97605515c"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0014:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0014</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0014</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0014:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="188" vpos="1198" width="579" height="41"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00008"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0015">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 15</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0015:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0015:ocr" dcx:filename="DDD_000022499_0015_articletext.xml" dcx:md5_checksum="cd9fbac3a33706fe0ed787038388c18f"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0015:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0015</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0015</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0015:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="885" vpos="1192" width="748" height="1789"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00013"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0016">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 16</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0016:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0016:ocr" dcx:filename="DDD_000022499_0016_articletext.xml" dcx:md5_checksum="f3301c577b82a85abb573546b6d7fd8d"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0016:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0016</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0016</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0016:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="1137" vpos="2986" width="432" height="30"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00014"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0017">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 17</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0017:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0017:ocr" dcx:filename="DDD_000022499_0017_articletext.xml" dcx:md5_checksum="07f0cdb2ba98c836bec516f20f437fe3"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0017:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0017</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0017</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0017:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="113" vpos="3050" width="1513" height="2076"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00015"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0018">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 18</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0018:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0018:ocr" dcx:filename="DDD_000022499_0018_articletext.xml" dcx:md5_checksum="a525954a8aabe1b4d71316dd154f000c"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0018:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0018</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0018</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0018:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="852" vpos="5127" width="658" height="43"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00019"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0019">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 19</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0019:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0019:ocr" dcx:filename="DDD_000022499_0019_articletext.xml" dcx:md5_checksum="527b57eb5b2f731af995d7f51919a77b"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0019:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0019</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0019</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0019:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="1649" vpos="1204" width="754" height="3966"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00010"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0020">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 20</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0020:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0020:ocr" dcx:filename="DDD_000022499_0020_articletext.xml" dcx:md5_checksum="be2d28eff12f4b10317a4f6cc2119771"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0020:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0020</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0020</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0020:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="2426" vpos="3009" width="744" height="2164"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00018"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0021">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 21</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0021:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0021:ocr" dcx:filename="DDD_000022499_0021_articletext.xml" dcx:md5_checksum="670586999d449481e9f6de3fc53f7197"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0021:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0021</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0021</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0021:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="2411" vpos="1187" width="1470" height="1776"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00011"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0022">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 22</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0022:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0022:ocr" dcx:filename="DDD_000022499_0022_articletext.xml" dcx:md5_checksum="073004a71f90d80b3a82a1f697c42e6f"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0022:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>advertentie</dc:subject>
+									<dc:title>Advertentie</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0022</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0022</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0022:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="3176" vpos="2980" width="716" height="1890"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00016"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0023">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 23</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0023:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0023:ocr" dcx:filename="DDD_000022499_0023_articletext.xml" dcx:md5_checksum="739ede7ed1e06379fac68c2173ca15a1"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0023:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>familiebericht</dc:subject>
+									<dc:title>Familiebericht</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0023</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0023</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0023:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="116" vpos="1283" width="741" height="1356"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00009"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+					<didl:Item dc:identifier="ddd:000022499:mpeg21:a0024">
+						<didl:Descriptor>
+							<didl:Statement mimeType="text/plain" dc:type="role">article 24</didl:Statement>
+						</didl:Descriptor>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0024:ocr">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">ocr</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml" ref="http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0024:ocr" dcx:filename="DDD_000022499_0024_articletext.xml" dcx:md5_checksum="831dc889b4f6505c4ae8b5d5a7e26eb6"></didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0024:metadata">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<srw_dc:dcx>
+									<dc:subject>familiebericht</dc:subject>
+									<dc:title>Familiebericht</dc:title>
+									<dcterms:accessRights>accessible</dcterms:accessRights>
+									<dcx:recordIdentifier>ddd:000022499:mpeg21:a0024</dcx:recordIdentifier>
+									<dc:identifier>http://resolver.kb.nl/resolve?urn=ddd:000022499:mpeg21:a0024</dc:identifier>
+									<dc:type xsi:type="dcterms:DCMIType">Text</dc:type>
+								</srw_dc:dcx>
+							</didl:Resource>
+						</didl:Component>
+						<didl:Component dc:identifier="ddd:000022499:mpeg21:a0024:zoning">
+							<didl:Descriptor>
+								<didl:Statement mimeType="text/plain" dc:type="role">metadata/zoning</didl:Statement>
+							</didl:Descriptor>
+							<didl:Resource mimeType="text/xml">
+								<dcx:zoning>
+									<dcx:article-part order="1" pageid="ddd:000022499:mpeg21:p004">
+										<dcx:coordinates image="DDD_000022499_004_access.jp2">
+											<dcx:area hpos="111" vpos="2654" width="749" height="360"></dcx:area>
+										</dcx:coordinates>
+										<dcx:blocks alto="DDD_000022499_004_alto.xml">
+											<dcx:TextBlock ID="P4_TB00012"></dcx:TextBlock>
+										</dcx:blocks>
+									</dcx:article-part>
+								</dcx:zoning>
+							</didl:Resource>
+						</didl:Component>
+					</didl:Item>
+				</didl:Item>
+			</didl:DIDL>
+			</metadata>
+		</record>
+	</GetRecord>
+</OAI-PMH>
