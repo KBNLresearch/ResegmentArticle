@@ -62,7 +62,9 @@ class RedefineArticle:
             clean_up: Whether to remove intermediate columns from returned text.
             delpher_api_key: API key sent when retrieving Delpher metadata.
             alto_cache_dir: Optional directory used by ``SegmentPage`` for ALTO
-                XML caching.
+                XML caching, or pre-downloaded ALTO XML files.
+            mpeg21_cache_dir: Optional directory used for MPEG21 XML caching, or
+                pre-downloaded MPEG21 XML files.
             **kwargs: Additional options forwarded to each ``SegmentPage``.
 
         Raises:
@@ -246,10 +248,8 @@ class RedefineArticle:
             block_data[part.attrib['pageid']] = block_ids
 
         if len(block_data) == 0:
-            print("No text blocks found in the article parts.")
-        if len(block_data) > 2:
-            print("Warning: More than 2 pages found in the article parts. Only the first 2 pages will be processed.")
-            
+            raise ValueError("No text blocks found in the article parts. Please check the article identifier and the MPEG metadata.")
+
         return block_data
 
 
