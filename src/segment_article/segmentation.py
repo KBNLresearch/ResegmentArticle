@@ -1,14 +1,16 @@
 import re
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
-from collections.abc import Mapping, Sequence
-
-import pandas as pd
-import numpy as np
 import requests
+
+import numpy as np
+import pandas as pd
 import validators
 from lxml import etree
+
 from .helpers import zscore
+
 # from shapely.geometry import LineString
 
 class SegmentPage:

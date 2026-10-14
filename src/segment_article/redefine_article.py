@@ -3,9 +3,10 @@ import re
 from collections import OrderedDict
 from itertools import pairwise
 from pathlib import Path
+import requests
+
 import numpy as np
 import pandas as pd
-import requests
 from lxml import etree
 
 from .segmentation import SegmentPage
@@ -80,7 +81,7 @@ class RedefineArticle:
         if isinstance(zones, str):
             zones = ast.literal_eval(zones)
             if not isinstance(zones, list):
-                raise ValueError("Zones must be a list of dictionaries")
+                raise ValueError("Zones must be a list")
             
         self.zones : list[dict] | None = zones
         self.page_zones: dict[str, list[dict]] = {}

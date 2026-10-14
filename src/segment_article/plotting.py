@@ -1,10 +1,9 @@
+from io import BytesIO
 from pathlib import Path
+import requests
 
 import pandas as pd
 from PIL import Image, ImageDraw
-from io import BytesIO
-import requests
-
 
 
 def fetch_image(
