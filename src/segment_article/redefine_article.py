@@ -21,6 +21,7 @@ class RedefineArticle:
             add_zoning: bool = False,
             xzwh_zoning: bool = True,
             clean_up=True,
+            delpher_api_key: str | None = None,
             alto_cache_dir: str | Path | None = None,
             **kwargs
         ):
@@ -43,6 +44,7 @@ class RedefineArticle:
         self.clean_up = clean_up
         self.xzwh_zoning = xzwh_zoning
         self.segment_page_kwargs = kwargs
+        self.delpher_api_key = delpher_api_key
         self.alto_cache_dir = alto_cache_dir
 
         self.zoning : list[pd.DataFrame] = []
@@ -110,7 +112,10 @@ class RedefineArticle:
         # Get metadata for current paper
         self.url = f"https://resolver.kb.nl/resolve?urn={paper_identifier}"
 
-        with requests.get(self.url) as response:
+        headers = {
+            "x-api-key" : self.delpher_api_key
+        }
+        with requests.get(self.url, headers=headers) as response:
             response.raise_for_status()
             didl_content = response.content
             self.didl_tree = etree.fromstring(didl_content)

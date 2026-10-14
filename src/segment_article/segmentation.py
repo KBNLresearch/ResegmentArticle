@@ -27,12 +27,17 @@ class SegmentPage:
             alto_xml_tree: etree._Element | str | Path,
             block_filter: Sequence[str] | None = None,
             zone_filter: Sequence[Mapping[str, Any]] | None = None,
+            paragraph_segmentation: bool = True,
+            article_segmentation: bool = True,
             article_id_output_col: str = 'article_id',
             paragraph_id_output_col: str = 'paragraph_id',
             block_id_col: str = 'block_id',
             block_article_id_col: str = 'block_article_id',
             article_split_threshold: float = 1.7,
             article_single_line_split: bool = True,
+            merge_single_line_article_to_next: bool = True,
+            ignore_blocks: bool = False,
+            article_gap_outlier_cutoff: float = 30,
             paragraph_split_threshold_z: float = 1,
             paragraph_split_threshold_r: float = 0.02,
             paragraph_single_line_split: bool = True,
@@ -50,6 +55,8 @@ class SegmentPage:
             block_filter: Optional list of block IDs to restrict processing to.
             zone_filter: Optional list of zone coordinates (x, y, w, h or hpos, vpos,
                 width, height), which are resolved to block IDs and override block_filter.
+            paragraph_segmentation: Whether to segment paragraphs.
+            article_segmentation: Whether to segment articles.
             article_id_output_col: Name of the column used for article identifiers.
             paragraph_id_output_col: Name of the column used for paragraph identifiers.
             block_id_col: Name of the column that stores block identifiers.
@@ -57,6 +64,13 @@ class SegmentPage:
                 article identifiers.
             article_split_threshold: Threshold used to detect article boundaries.
             article_single_line_split: Whether a single line should trigger a new article.
+            merge_single_line_article_to_next: Whether a single-line article should be 
+                merged with the next article. Usually these lines are headers or titles.
+            article_gap_outlier_cutoff: Vertical gaps above this value (ALTO units) always start
+                a new article and are excluded from the gap z-score.
+            ignore_blocks: Segment articles on line spacing across the whole page, ignoring
+                block boundaries (also disables the logical flow, same column and single
+                line rules, which are block-based).
             paragraph_split_threshold_z: Z-score threshold used to detect paragraph start 
                 positions (z-score is based on relative horizontal distance of a line 
                 to the text block boundary). Used in combination with `paragraph_split_threshold_r`,
@@ -79,12 +93,17 @@ class SegmentPage:
         """
         self.alto_xml_input = alto_xml_tree
         self.block_filter = list(block_filter or [])
+        self.paragraph_segmentation = paragraph_segmentation
+        self.article_segmentation = article_segmentation
         self.article_id_output_col = article_id_output_col
         self.paragraph_id_output_col = paragraph_id_output_col
         self.block_id_col = block_id_col
         self.block_article_id_col = block_article_id_col
         self.article_split_threshold = article_split_threshold
         self.article_single_line_split = article_single_line_split
+        self.merge_single_line_article_to_next = merge_single_line_article_to_next
+        self.ignore_blocks = ignore_blocks
+        self.article_gap_outlier_cutoff = article_gap_outlier_cutoff
         self.paragraph_split_threshold_z = paragraph_split_threshold_z
         self.paragraph_split_threshold_r = paragraph_split_threshold_r
         self.paragraph_single_line_split = paragraph_single_line_split
@@ -133,10 +152,20 @@ class SegmentPage:
         self.block_filter = self.block_filter if block_filter is None else list(block_filter)
 
         self.df = self.get_text_lines_df(block_filter=self.block_filter, keep_styles=self.keep_styles)
+        
+        if self.article_segmentation:
+            self.df = self.segment_articles(self.df, block_filter=self.block_filter)
+        else:
+            # For compatibility with code expecting article segmentation
+            self.df['is_article_start'] = False
+            self.df.loc[self.df.index[0], 'is_article_start'] = True
+            self.df[self.article_id_output_col] = "A001"
+            self.df['block_article_id'] = self.df[self.block_id_col] + "_" + self.df[self.article_id_output_col]
 
-        self.df = self.segment_articles(self.df, block_filter=self.block_filter)
-
-        self.df = self.segment_paragraphs(self.df, block_filter=self.block_filter)
+        if self.paragraph_segmentation:
+            self.df = self.segment_paragraphs(self.df, block_filter=self.block_filter)
+        else:
+            self.df[self.paragraph_id_output_col] = "P001"
 
         return self.df
 
@@ -216,6 +245,9 @@ class SegmentPage:
         self.text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
 
         group_column = self.block_id_col
+        if self.ignore_blocks:
+            group_column = "_page_group"
+            df[group_column] = 0
 
         grouped = df.groupby(group_column, sort=False)
         group_order = grouped.ngroup()
@@ -224,38 +256,76 @@ class SegmentPage:
         previous_top = line_top.groupby(df[group_column], sort=False).shift()
         vpos_diff = df["vpos"] - previous_top
 
-        
-        vpos_diff_z = self._group_zscore(
-            df, vpos_diff, [group_column]
-        )
-        # vpos_diff_z = zscore(vpos_diff)
+        # Large gaps are outliers and would mask smaller ones in the z-score.
+        outliers = vpos_diff >= self.article_gap_outlier_cutoff
+        z_input = vpos_diff.where(~outliers)
+        if self.ignore_blocks:
+            # Negative gaps are column jumps.
+            z_input = z_input.where(z_input > 0)
 
-        min_difference = grouped["height"].transform("median") // 3
-        min_difference = df["height"].median() // 3
+        vpos_diff_z = self._group_zscore(
+            df=df, 
+            values=z_input, 
+            group_columns=[group_column]
+        )
+
+        if self.ignore_blocks:
+            min_difference = grouped["height"].transform("median") // 3
+        else:
+            min_difference = df["height"].median() // 3
+
         # print(min_difference)
         df["vpos_diff"] = vpos_diff
         df["vpos_diff_z"] = vpos_diff_z
         df["is_article_start"] = (
             (vpos_diff_z >= self.article_split_threshold)
             & (vpos_diff >= min_difference)
-        )
+        ) | outliers
 
-        if self.article_single_line_split:
+        # Lines with 'hyppart2', (second part of a hyphenated word) cannot be a start of a new article.
+        if 'hyppart2' in df.columns:
+            df.loc[df['hyppart2'].notna(), "is_article_start"] = False
+
+        if self.article_single_line_split and not self.ignore_blocks:
             single_line = grouped[group_column].transform("size").eq(1)
             df.loc[single_line, "is_article_start"] = True
+        
 
         # Match groupby.apply's group order before assigning cumulative IDs.
         df = df.assign(_group_order=group_order)
         df = df.sort_values("_group_order", kind="stable").drop(columns="_group_order")
         df = df.reset_index(drop=True)
 
-        text_blocks_df = self.text_blocks_df.set_index("id")
-        logical_flow = df[self.block_id_col].map(text_blocks_df["logical_flow"])
-        first_line = ~df[self.block_id_col].duplicated(keep="first")
-        df.loc[~logical_flow & first_line, "is_article_start"] = True
+        # Define article start points
+        if self.ignore_blocks:
+            df = df.drop(columns=group_column)
+            # The first line always opens an article.
+            df.loc[0, "is_article_start"] = True
+        else:
+            text_blocks_df = self.text_blocks_df.set_index("id")
+            logical_flow = df[self.block_id_col].map(text_blocks_df["logical_flow"])
+            # First line of a block is considered an article start
+            first_line = ~df[self.block_id_col].duplicated(keep="first")
+            df.loc[~logical_flow & first_line, "is_article_start"] = True
 
-        same_column = df[self.block_id_col].map(text_blocks_df["same_column"])
-        df.loc[same_column & first_line, "is_article_start"] = True
+            same_column = df[self.block_id_col].map(text_blocks_df["same_column"])
+            df.loc[same_column & first_line, "is_article_start"] = True
+
+        # Refine article split based on sentence endings and line widths
+        if "text" in df.columns and len(df) > 1:
+            df = self.filter_article_splits_based_on_capitalization_and_line_width(df)
+
+        if self.merge_single_line_article_to_next:
+            starts = df["is_article_start"].to_numpy(copy=True)
+            # Sequential, so a merged article is not treated as single-line again.
+            article_len = 0
+            for i in range(len(starts)):
+                if starts[i] and i > 0 and article_len == 1:
+                    starts[i] = False
+                if starts[i]:
+                    article_len = 0
+                article_len += 1
+            df["is_article_start"] = starts
 
         df[self.article_id_output_col] = (
             "A" + df["is_article_start"].cumsum().astype(str).str.zfill(3)
@@ -265,6 +335,44 @@ class SegmentPage:
         )
 
         self.article_df = df.copy()
+        return df
+
+    def filter_article_splits_based_on_capitalization_and_line_width(
+            self,
+            df,
+    ) -> pd.DataFrame:
+        """
+        Filter article splits based on capitalization rules to avoid incorrect splits.
+
+        Args:
+            df (pd.DataFrame): DataFrame containing text lines with article identifiers.
+
+        Returns:
+            pd.DataFrame: A DataFrame with potentially updated article start flags.
+
+        """
+        sub_df = df.copy()
+        # Get lines with article start, and their predecessor line
+        sub_df = sub_df[sub_df['is_article_start'] | sub_df['is_article_start'].shift(fill_value=False)]
+        
+        previous_text = sub_df["text"].shift().fillna("").astype(str)
+        current_text = sub_df["text"].fillna("").astype(str)
+        width_diff = sub_df["width"].diff().fillna(0).abs()
+        similar_width = (width_diff / sub_df["width"]) <= 0.01
+
+        previous_has_sentence_end = previous_text.str.rstrip()\
+            .str[-1].isin([".", "?", "!"])
+        
+        current_starts_capital = current_text.str.lstrip().str[0].str.isupper()
+        continuation = (
+            similar_width
+            & ~previous_has_sentence_end
+            & ~current_starts_capital.fillna(False)
+        )
+        sub_df.loc[continuation, "is_article_start"] = False
+
+        # Apply the capitalization-based filtering to the article splits
+        df.loc[sub_df.index, "is_article_start"] = sub_df["is_article_start"]
         return df
     
 
@@ -287,22 +395,45 @@ class SegmentPage:
         block_filter = self.block_filter if block_filter is None else list(block_filter)
         self.text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
 
-        group_columns = [self.block_id_col, self.article_id_output_col]
+
+        group_columns = [self.block_id_col]
+
+        if self.article_segmentation:
+            group_columns.append(self.article_id_output_col)
+
         grouped = df.groupby(group_columns, sort=False)
         group_order = grouped.ngroup()
 
-        hpos_pct_diff = (df["hpos"] - df["block_hpos"]) / df["block_width"]
+
+        # Recalculate block_hpos and block_width per block, by using the min hpos 
+        # and max hpos within each block. (sometimes the block boundaries were 
+        # not based on the individual line positions)
+        block_hpos = grouped["hpos"].transform("min")
+        block_width = grouped["width"].transform("max")
+
+        hpos_pct_diff = (df["hpos"] - block_hpos) / block_width
+
         outliers = hpos_pct_diff.abs() > 0.15
 
         # Exclude outliers from each group's z-score calculation.
         hpos_z = self._group_zscore(
             df, hpos_pct_diff.where(~outliers), group_columns
         )
+
+        # df["hpos_pct_diff"] = hpos_pct_diff
+        # df["hpos_z"] = hpos_z
+
         paragraph_indent = (
             (hpos_z >= self.paragraph_split_threshold_z)
             & (hpos_pct_diff >= self.paragraph_split_threshold_r)
         )
         df["is_paragraph_start"] = paragraph_indent | outliers
+
+        # Lines with 'hyppart2', (second part of a hyphenated word) cannot be the 
+        # start of a new paragraph.
+        if 'hyppart2' in df.columns:
+            df.loc[df['hyppart2'].notna(), "is_paragraph_start"] = False
+
 
         if self.paragraph_single_line_split:
             single_line = grouped[group_columns[0]].transform("size").eq(1)

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 from PIL import Image, ImageDraw
 from io import BytesIO
@@ -5,12 +7,25 @@ import requests
 
 
 
-def fetch_image(page_id):
+def fetch_image(page_id, image_cache:str|Path|None=None):
+
+    if image_cache is not None:
+        image_cache = Path(image_cache)
+        image_cache.mkdir(parents=True, exist_ok=True)
+        file = page_id.replace(":", "_") + ".jpg"
+        cached_image_path = image_cache / file
+        if cached_image_path.exists():
+            return Image.open(cached_image_path)
+    
     img_url = f"https://resolver.kb.nl/resolve?urn={page_id}:image"
+
     with requests.get(img_url) as response:
         response.raise_for_status()
         img_content = response.content
         img = Image.open(BytesIO(img_content))
+    
+    if image_cache:
+        img.save(cached_image_path)
     return img
 
 
