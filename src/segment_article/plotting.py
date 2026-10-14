@@ -7,11 +7,22 @@ import requests
 
 
 
-def fetch_image(page_id, image_cache:str|Path|None=None):
+def fetch_image(
+        page_id, 
+        image_cache:str|Path|None=None
+    ) -> Image.Image:
+    """Fetch an image for the given page ID, optionally using a local cache.
 
-    if image_cache is not None:
+    Args:
+        page_id: The identifier of the page to fetch.
+        image_cache: Optional directory to use for caching downloaded images.
+
+    Returns:
+        PIL.Image.Image: The fetched image.
+    """
+
+    if image_cache:
         image_cache = Path(image_cache)
-        image_cache.mkdir(parents=True, exist_ok=True)
         file = page_id.replace(":", "_") + ".jpg"
         cached_image_path = image_cache / file
         if cached_image_path.exists():
@@ -25,7 +36,9 @@ def fetch_image(page_id, image_cache:str|Path|None=None):
         img = Image.open(BytesIO(img_content))
     
     if image_cache:
+        image_cache.mkdir(parents=True, exist_ok=True)
         img.save(cached_image_path)
+
     return img
 
 

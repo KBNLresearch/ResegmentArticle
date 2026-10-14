@@ -298,9 +298,8 @@ class RedefineArticle:
                     f.write(didl_content)
 
         return self.didl_tree
-        
-            
 
+        
     def get_page_paragraphs(
             self,
             page_block_filter : dict|None = None,

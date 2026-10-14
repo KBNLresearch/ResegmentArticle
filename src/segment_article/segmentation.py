@@ -54,7 +54,6 @@ class SegmentPage:
             paragraph_single_line_split: bool = True,
             keep_styles: bool = True,
             clean_up: bool = True,
-            use_alto_cache: bool = False,
             alto_cache_dir: str | Path | None=None,
         ) -> None:
         """Configure segmentation and load the ALTO XML source.
@@ -95,11 +94,7 @@ class SegmentPage:
                 can be useful for further analysis or processing of the segmented text.
                 However, this causes overhead in terms of memory and processing time.
             clean_up: Whether to apply cleanup steps during segmentation.
-            use_alto_cache: Whether to check for an existing ALTO XML file, if a url
-                or page identifier is provided, and use it if available. If not 
-                available, the ALTO XML will be downloaded and cached for future use.
-            alto_cache_dir: Directory path to store or retrieve cached ALTO XML files. This is used
-                in combination with `use_alto_cache`.
+            alto_cache_dir: Directory path to store or retrieve cached ALTO XML files. 
 
         Raises:
             ValueError: If the source is not a supported path, page identifier,
@@ -123,7 +118,6 @@ class SegmentPage:
         self.paragraph_single_line_split = paragraph_single_line_split
         self.keep_styles = keep_styles
         self.clean_up = clean_up
-        self.use_alto_cache = use_alto_cache
         self.alto_cache_dir = Path(alto_cache_dir) if alto_cache_dir is not None else None
 
         self.alto_xml_tree = self.load_alto_xml(alto_xml_tree)
@@ -502,8 +496,8 @@ class SegmentPage:
             df, hpos_pct_diff.where(~outliers), group_columns
         )
 
-        # df["hpos_pct_diff"] = hpos_pct_diff
-        # df["hpos_z"] = hpos_z
+        df["hpos_pct_diff"] = hpos_pct_diff
+        df["hpos_z"] = hpos_z
 
         paragraph_indent = (
             (hpos_z >= self.paragraph_split_threshold_z)
@@ -527,11 +521,14 @@ class SegmentPage:
 
         text_blocks = self.text_blocks_df.set_index("id")
         same_column = df[self.block_id_col].map(text_blocks["same_column"])
+        logical_flow = df[self.block_id_col].map(text_blocks["logical_flow"])
+        
         first_line = ~df[self.block_id_col].duplicated(keep="first")
-        df.loc[
-            same_column & ~first_line & df["is_article_start"],
-            "is_paragraph_start",
-        ] = True
+
+        p_start = (same_column & ~first_line & df["is_article_start"]) \
+            | (~logical_flow & first_line)
+
+        df.loc[p_start, "is_paragraph_start"] = True
 
         df[self.paragraph_id_output_col] = (
             "P" + df["is_paragraph_start"].cumsum().astype(str).str.zfill(3)
@@ -562,7 +559,7 @@ class SegmentPage:
             requests.HTTPError: If the remote request returns an unsuccessful
                 status code.
         """
-        use_cache = use_cache or self.use_alto_cache
+        use_cache = use_cache or bool(self.alto_cache_dir)
 
         ID_PATTERN = r'[\w\d]{3,}:\d{9}:mpeg21:p\d{2,}'
 
@@ -1034,38 +1031,6 @@ class SegmentPage:
                 line_text['hyphenated'] = False
             
             df = df.merge(line_text, how='left', left_on='id', right_on='line_id')
-
-        return df
-
-
-    def find_article_starts(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Mark article starts from vertical gaps within an ordered line block.
-
-        This helper uses the global z-score helper and the configured article
-        threshold, unlike :meth:`segment_articles`, which groups and refines
-        page-level lines.
-
-        Args:
-            df: Ordered line rows containing ``vpos`` and ``height`` columns.
-
-        Returns:
-            pd.DataFrame: The input rows with ``is_article_start``. Intermediate
-                gap columns are removed when ``clean_up`` is enabled.
-        """
-        df['line_top'] = df['vpos'] + df['height']
-        df['vpos_diff'] = df['vpos'] - df['line_top'].shift(1)
-        df['vpos_diff_z'] = zscore(df['vpos_diff'], nan_policy='omit')
-
-        min_difference = df.height.median() // 3
-        df['is_article_start'] = (df['vpos_diff_z'] >= self.article_split_threshold) & (
-            df['vpos_diff'] >= min_difference
-        )
-
-        if self.article_single_line_split and len(df) == 1:
-            df['is_article_start'] = True
-
-        if self.clean_up:
-            df.drop(columns=['line_top', 'vpos_diff', 'vpos_diff_z'], inplace=True)
 
         return df
 
