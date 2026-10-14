@@ -12,6 +12,23 @@ from .segmentation import SegmentPage
 
 
 class RedefineArticle:
+    """Retrieve or apply article zoning and re-segment its page content.
+
+    The class obtains page and block selections from Delpher metadata or from
+    caller-supplied image-coordinate zones, then uses :class:`SegmentPage` to
+    create line and paragraph data. Processing can optionally retain zoning
+    data and filter the resulting articles by keywords.
+
+    Attributes:
+        article_id: Delpher identifier of the article to process.
+        paper_id: Paper identifier derived from ``article_id``.
+        paragraph_df: Processed paragraph rows, including page-local and
+            article-level identifiers.
+        paragraph_texts: Paragraph rows returned by :meth:`process_article`.
+        zoning_df: Processed text-block zoning data when ``add_zoning`` is true.
+        lines_df: Concatenated, unfiltered line data from processed pages.
+    """
+
     def __init__(
             self, 
             article_id, 
@@ -25,6 +42,32 @@ class RedefineArticle:
             alto_cache_dir: str | Path | None = None,
             **kwargs
         ):
+        """Configure article retrieval, segmentation, and optional filtering.
+
+        Args:
+            article_id: Delpher identifier for the article, including its page
+                or article suffix.
+            keywords: Optional terms used to retain matching articles and
+                paragraphs between keyword hits.
+            zones: Optional list of image-coordinate zone dictionaries, or a
+                string representation of that list. Each zone must include an
+                ``image`` filename and coordinates accepted by ``SegmentPage``.
+            max_paragraph_gap: Maximum number of intervening paragraphs to keep
+                between keyword hits. A false value keeps all paragraphs between
+                the first and last hit.
+            add_zoning: Whether to build and expose text-block zoning data.
+            xzwh_zoning: Whether :meth:`zoning_to_dict` uses ``x``, ``y``, ``w``,
+                ``h`` coordinate keys by default.
+            clean_up: Whether to remove intermediate columns from returned text.
+            delpher_api_key: API key sent when retrieving Delpher metadata.
+            alto_cache_dir: Optional directory used by ``SegmentPage`` for ALTO
+                XML caching.
+            **kwargs: Additional options forwarded to each ``SegmentPage``.
+
+        Raises:
+            ValueError: If ``zones`` is a string that does not evaluate to a
+                list.
+        """
 
         self.article_id = article_id
         self.paper_id = article_id.rsplit(":", 1)[0]
@@ -51,6 +94,14 @@ class RedefineArticle:
         self.page_block_filter : dict|None = None
 
     def __call__(self, **kwargs):
+        """Process the article; equivalent to calling :meth:`process_article`.
+
+        Args:
+            **kwargs: Keyword arguments forwarded to :meth:`process_article`.
+
+        Returns:
+            pd.DataFrame: Processed paragraph rows.
+        """
         return self.process_article(**kwargs)
 
 
@@ -58,6 +109,22 @@ class RedefineArticle:
             self, 
             keywords: list[str] | None = None
         ):
+        """Retrieve zoning, segment pages, and optionally filter by keywords.
+
+        Args:
+            keywords: Terms used to select relevant paragraphs and articles.
+                If omitted, the value supplied to the constructor is used.
+
+        Returns:
+            pd.DataFrame: Paragraph text and associated metadata. When keyword
+                filtering is enabled, paragraphs are merged across page breaks
+                and labeled with the original ``article_id``.
+
+        Side Effects:
+            Updates ``page_block_filter``, ``paragraph_df``,
+            ``paragraph_texts``, and the page-processing state. When zoning is
+            enabled, also prepares ``zoning_df``.
+        """
 
         keywords = self.keywords if keywords is None else keywords
 
@@ -81,11 +148,20 @@ class RedefineArticle:
     
 
     def get_zoning_from_coordinates(self) -> dict:
-        """
-        Group the user-supplied zones per page, without requesting the DIDL.
+        """Group caller-supplied image-coordinate zones by page without DIDL.
+
         The page id is derived from the image filename, e.g.
         'DDD_000022499_003_access.jp2' -> 'ddd:000022499:mpeg21:p003'.
         Block ids are resolved per page by SegmentPage.
+
+        Returns:
+            dict[str, list[str]]: Ordered mapping of page identifiers to empty
+                block filters; the coordinate zones are stored in ``page_zones``
+                for ``SegmentPage`` to resolve.
+
+        Raises:
+            ValueError: If a zone image filename does not contain a page number
+                followed by ``_access``.
         """
         self.page_zones = OrderedDict()
         for zone in self.zones:
@@ -102,6 +178,17 @@ class RedefineArticle:
 
 
     def get_article_zoning(self) -> dict:
+        """Get the article's page-to-block selection.
+
+        If coordinate zones were supplied, groups those zones by page. Otherwise
+        retrieves the paper's DIDL metadata and extracts the text block IDs for
+        the article's parts.
+
+        Returns:
+            dict[str, list[str]]: Ordered mapping from page identifiers to the
+                selected ALTO text-block IDs. For coordinate zones, values are
+                empty lists because blocks are resolved from the zones later.
+        """
 
         if self.zones:
             return self.get_zoning_from_coordinates()
@@ -159,6 +246,22 @@ class RedefineArticle:
             self,
             page_block_filter : dict|None = None,
         ) -> pd.DataFrame:
+        """Segment selected blocks on each page and combine their paragraphs.
+
+        Args:
+            page_block_filter: Optional mapping from page identifiers to lists
+                of ALTO block IDs. If omitted or false-valued, uses the current
+                filter or obtains it with :meth:`get_article_zoning`.
+
+        Returns:
+            pd.DataFrame: Combined paragraph rows with page identifiers and
+                article IDs reassigned across page boundaries.
+
+        Side Effects:
+            Populates the line and paragraph dataframes and the per-page
+            ``SegmentPage`` objects. If ``add_zoning`` is true, also populates
+            ``zoning`` and ``zoning_df``.
+        """
 
         if not page_block_filter:
             if not self.page_block_filter:
@@ -220,13 +323,22 @@ class RedefineArticle:
 
     @staticmethod
     def assign_article_ids(df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Reassign article ids over all pages. The page-local id is kept in
+        """Reassign article IDs across pages while retaining page-local IDs.
+
+        The page-local ID is kept in
         'page_article_id'; the per-page dataframes (lines_dfs, paragraph_dfs)
         are not modified and keep the page-local ids.
 
         The first paragraph of a page that does not start with a paragraph break
         (paragraph_id P000) continues the last article of the previous page.
+
+        Args:
+            df: Paragraph rows containing ``page_idx``, ``article_id``, and
+                ``paragraph_id`` columns.
+
+        Returns:
+            pd.DataFrame: A copy with the original IDs renamed to
+                ``page_article_id`` and new cross-page ``article_id`` values.
         """
         df = df.rename(columns={'article_id': 'page_article_id'})
 
@@ -246,7 +358,20 @@ class RedefineArticle:
             zoning_df: pd.DataFrame,
             paragraph_df: pd.DataFrame,
         ) -> pd.DataFrame:
-        """Add the reassigned article_id to the zoning blocks, keeping the page-local one."""
+        """Attach reassigned paragraph article IDs to their zoning blocks.
+
+        The page-local article ID is retained as ``page_article_id``.
+
+        Args:
+            zoning_df: Zoning rows containing ``page_id``, ``block_article_id``,
+                and ``article_id`` columns.
+            paragraph_df: Paragraph rows containing ``page_id``,
+                ``block_article_id``, and reassigned ``article_id`` columns.
+
+        Returns:
+            pd.DataFrame: Zoning rows joined to the reassigned article IDs by
+                page and block. Unmatched zoning rows have a missing article ID.
+        """
         zoning_df = zoning_df.rename(columns={'article_id': 'page_article_id'})
 
         block_articles = paragraph_df\
@@ -257,11 +382,21 @@ class RedefineArticle:
 
 
     def merge_split_articles(self, keywords: list[str]) -> pd.DataFrame:
-        """
-        Keep only the (re)segmented articles that contain a keyword, plus the
-        articles bridging the gaps between hits and continuing over a page break.
+        """Keep articles selected by keyword hits and the configured gap rule.
 
-        Also filters self.zoning_df (if add_zoning) to the blocks of those articles.
+        Matching paragraphs select their full reassigned article. Paragraphs
+        between successive hits are included when their count does not exceed
+        ``max_paragraph_gap``; a false value includes the full span between the
+        first and last hit. Article IDs already account for page continuations.
+
+        If zoning is enabled, ``zoning_df`` is filtered to the selected articles.
+
+        Args:
+            keywords: Terms to search for in paragraph text, matched without
+                regard to case.
+
+        Returns:
+            pd.DataFrame: Selected paragraph rows in their original order.
         """
         df = self._paragraph_df.reset_index(drop=True)
 
@@ -293,6 +428,17 @@ class RedefineArticle:
             segment_page_obj : SegmentPage,
             page_id: str,
         ) -> pd.DataFrame:
+        """Build zoning rows for a segmented page.
+
+        Args:
+            segment_page_obj: Segmentation object containing the page's newly
+                created text blocks.
+            page_id: Identifier of the page represented by the object.
+
+        Returns:
+            pd.DataFrame: Text-block zoning rows augmented with ``page_id`` and
+                the page image filename.
+        """
 
         block_df = segment_page_obj.create_new_text_blocks_df()
         block_df['page_id'] = page_id
@@ -308,17 +454,18 @@ class RedefineArticle:
         ) -> list[dict]:
         """
         Convert the zoning dataframe to a list of dictionaries, with the coordinates
-        and the image filename. The coordinates can be in either be in ('hpos', 'vpos', 'width',
-        'height') or (x, y, w, h) format, depending on the use_xzwh parameter.
+        and image filename. Coordinates use either ``hpos``, ``vpos``, ``width``,
+        and ``height`` or ``x``, ``y``, ``w``, and ``h``, depending on
+        ``use_xzwh``.
 
         Args:
-            zoning_df (pd.DataFrame | None): The zoning dataframe to convert. 
-                If None, use self.zoning_df.
-            use_xzwh (bool | None): Whether to use x, y, w, h format for the coordinates. 
-                If None, use self.xzwh_zoning.
+            zoning_df: Zoning rows to convert. If ``None``, uses ``self.zoning_df``.
+            use_xzwh: Whether to use ``x``, ``y``, ``w``, ``h`` coordinate keys.
+                If ``None``, uses ``self.xzwh_zoning``.
 
         Returns:
-            list[dict]: A list of dictionaries, each containing the coordinates and the image filename.
+            list[dict]: One dictionary per zoning row, containing the selected
+                coordinate keys and the ``image`` filename.
         """
 
         if isinstance(zoning_df, type(None)):
@@ -349,8 +496,11 @@ class RedefineArticle:
 
     @property
     def lines_df(self) -> pd.DataFrame:
-        """
-        Return the unfiltered lines dataframe of all the processed blocks.
+        """Return all processed line rows, before paragraph/article filtering.
+
+        Returns:
+            pd.DataFrame: Concatenated line data from every processed page. The
+                result is cached after the first access.
         """
         if not hasattr(self, '_lines_df'):
             self._lines_df = pd.concat(self.lines_dfs, ignore_index=True)
@@ -361,8 +511,13 @@ class RedefineArticle:
             self, 
             page_id: str
         ):
-        """
-        Get the filename of the page image from the zones or the DIDL XML.
+        """Get a page image filename from supplied zones or DIDL metadata.
+
+        Args:
+            page_id: Identifier of the page whose image filename is requested.
+
+        Returns:
+            str: Image filename associated with the page.
         """
         if page_id in self._page_images:
             return self._page_images[page_id]
@@ -379,8 +534,14 @@ class RedefineArticle:
 
     
     def paragraphs_to_text(self, texts_df, sep="\n\n") -> str:
-        """
-        Merge the texts of the paragraphs into a single text.
+        """Join paragraph text values into a single string.
+
+        Args:
+            texts_df: DataFrame containing a ``text`` column.
+            sep: String inserted between consecutive paragraph texts.
+
+        Returns:
+            str: Joined paragraph text.
         """
         return sep.join(texts_df['text'].tolist())
 
@@ -389,8 +550,18 @@ class RedefineArticle:
             self,
             df: pd.DataFrame | None = None
         ) -> str:
-        """
-        Convert the paragraphs dataframe to XML format.
+        """Wrap paragraph texts in a simple ``<text>`` XML document, to the same
+        format as the source OCR XML data in the newspaper collection.
+
+        Args:
+            df: Paragraph DataFrame containing a ``text`` column. If ``None``,
+                uses ``self.paragraph_texts``.
+
+        Returns:
+            str: XML declaration, root element, and one ``<p>`` element per row.
+
+        Note:
+            Text values are inserted as-is and are not XML-escaped.
         """
         if isinstance(df, type(None)):
             df = self.paragraph_texts

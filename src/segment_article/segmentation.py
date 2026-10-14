@@ -233,6 +233,10 @@ class SegmentPage:
         """
         Segment the text lines into articles based on vertical spacing.
 
+        Spacing must be greater than the threshold on the z-score of the
+        difference, and, as a guardrail, greater than a third of the median line 
+        height within the block.
+
         Args:
             df (pd.DataFrame): DataFrame containing text lines with block identifiers.
             block_filter: Optional list of block IDs to restrict processing to.
@@ -240,18 +244,22 @@ class SegmentPage:
         Returns:
             pd.DataFrame: A DataFrame containing the text lines with article identifiers.
         """
-
+        # Filter the text blocks based on the provided block filter.
         block_filter = self.block_filter if block_filter is None else list(block_filter)
         self.text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
 
+        # Group by block (if not ignoring blocks)
         group_column = self.block_id_col
+
         if self.ignore_blocks:
+            # Create psudogroup for all lines when ignoring blocks
             group_column = "_page_group"
-            df[group_column] = 0
+            df[group_column] = 0  
 
         grouped = df.groupby(group_column, sort=False)
         group_order = grouped.ngroup()
 
+        # Calculate the vertical position differences between lines
         line_top = df["vpos"] + df["height"]
         previous_top = line_top.groupby(df[group_column], sort=False).shift()
         vpos_diff = df["vpos"] - previous_top
@@ -269,14 +277,12 @@ class SegmentPage:
             group_columns=[group_column]
         )
 
-        if self.ignore_blocks:
-            min_difference = grouped["height"].transform("median") // 3
-        else:
-            min_difference = df["height"].median() // 3
+        # Determine the minimum vertical difference required to consider a new article.
+        min_difference = grouped["height"].transform("median") // 3
 
-        # print(min_difference)
-        df["vpos_diff"] = vpos_diff
-        df["vpos_diff_z"] = vpos_diff_z
+        # df["vpos_diff"] = vpos_diff
+        # df["vpos_diff_z"] = vpos_diff_z
+
         df["is_article_start"] = (
             (vpos_diff_z >= self.article_split_threshold)
             & (vpos_diff >= min_difference)
@@ -343,6 +349,14 @@ class SegmentPage:
     ) -> pd.DataFrame:
         """
         Filter article splits based on capitalization rules to avoid incorrect splits.
+        
+        For article splits, this method sets the "is_article_start" flag to False if:
+            - The previous line ends with a sentence-ending punctuation  
+            - And the current line does not start with a capital letter, indicating a 
+                continuation of the same paragraph.
+            - And the line widths of the previous and current lines are almost equal, 
+                indicating that the lines likely belong to the same paragraph.
+            All conditions must be met for the article start flag to be set to False.
 
         Args:
             df (pd.DataFrame): DataFrame containing text lines with article identifiers.
@@ -361,7 +375,7 @@ class SegmentPage:
         similar_width = (width_diff / sub_df["width"]) <= 0.01
 
         previous_has_sentence_end = previous_text.str.rstrip()\
-            .str[-1].isin([".", "?", "!"])
+            .str[-1].isin([".", "?", "!"])  
         
         current_starts_capital = current_text.str.lstrip().str[0].str.isupper()
         continuation = (
@@ -382,7 +396,10 @@ class SegmentPage:
             block_filter: Sequence[str] | None = None
         ) -> pd.DataFrame:
         """
-        Segment the text lines into paragraphs based on horizontal spacing.
+        Segment the text lines into paragraphs based on horizontal indentations, 
+        compared to the text block's border positions.
+        Uses relative difference, and z-scores of those differences to determine 
+        paragraph indentations.
 
         Args:
             df (pd.DataFrame): DataFrame containing text lines with article identifiers.
@@ -560,6 +577,19 @@ class SegmentPage:
             add_strings: bool = True,
             keep_styles: bool = True,
         ) -> pd.DataFrame:
+        """
+        Get a DataFrame containing the attributes of all TextLine elements in the ALTO XML tree.
+
+        Args:
+            block_filter (Sequence[str] | None): List of block IDs to include. If empty,
+                include all blocks.
+            add_strings (bool): Whether to include the text from String elements within each TextLine.
+            keep_styles (bool): Whether to keep style information from the ALTO XML.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing the attributes of the TextLine elements, 
+                with optional string and style information.
+        """
         blocks = self.alto_xml_tree.findall(".//TextBlock", namespaces=self.nsmap)
 
         if block_filter:
@@ -737,7 +767,27 @@ class SegmentPage:
             h_overlap_threshold: float = 0.8,
             clean_up: bool = True,
         ) -> pd.DataFrame:
-        """Check logical flow between consecutive blocks using horizontal overlap."""
+        """Check logical flow between consecutive blocks using horizontal overlap.
+        
+        It checks if:
+        - A consecutive block is in the same column (based on horizontal overlap)
+        - A consecutive block starts to the right of the previous block.
+        
+        If any of those conditions are met, there is a logical flow between the 
+        consecutive blocks. Meaning the text of the previous block probably logically 
+        continues into the next block.
+        
+        Args:
+            df (pd.DataFrame): DataFrame containing the blocks to check for logical flow.
+            h_overlap_threshold (float, optional): Threshold for horizontal overlap to 
+                consider blocks in the same column. Defaults to 0.8.
+            clean_up (bool, optional): Whether to remove intermediate columns used 
+                for calculation. Defaults to True.
+
+        Returns:
+            pd.DataFrame: DataFrame with additional columns indicating logical flow between blocks.
+        
+        """
         input_columns = df.columns.tolist()
         df = df.copy()
 
@@ -772,7 +822,6 @@ class SegmentPage:
             where=previous_length != 0,
         )
 
-        df['x2'] = df['hpos'] + df['width']
         df['pct_overlap'] = np.maximum(current_overlap, previous_overlap)
         df['same_column'] = df['pct_overlap'] >= h_overlap_threshold
         df['starts_right'] = df['hpos'] >= df['hpos'].shift(1)
@@ -790,10 +839,18 @@ class SegmentPage:
             add_strings: bool = True,
             keep_styles: bool = False,
         ) -> pd.DataFrame:
-        """
-        Get all TextLine elements in a given TextBlock element and return them as a DataFrame.
+        """Get all TextLine elements in a given TextBlock element and return them as a DataFrame.
+        
         If add_strings is True, also extract the String elements from each TextLine and add a
         'text' column to the DataFrame containing the concatenated content of the String elements.
+
+        Args:
+            block (etree._Element): The TextBlock element from which to extract TextLine elements.
+            add_strings (bool): If True, also extract String elements from each 
+                TextLine and add a 'text' column. Defaults to True.
+            keep_styles (bool): If True, retain style information from the XML elements. 
+                Defaults to False.
+
         """
         text_lines = block.findall(".//TextLine", namespaces=self.nsmap)
         df = self.elms_to_df(text_lines, keep_styles=keep_styles)
