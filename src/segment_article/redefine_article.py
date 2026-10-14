@@ -40,6 +40,7 @@ class RedefineArticle:
             clean_up=True,
             delpher_api_key: str | None = None,
             alto_cache_dir: str | Path | None = None,
+            mpeg21_cache_dir: str | Path | None = None,
             **kwargs
         ):
         """Configure article retrieval, segmentation, and optional filtering.
@@ -86,9 +87,10 @@ class RedefineArticle:
         self.max_paragraph_gap = max_paragraph_gap
         self.clean_up = clean_up
         self.xzwh_zoning = xzwh_zoning
+        self.alto_cache_dir = Path(alto_cache_dir) if alto_cache_dir else None
+        self.mpeg21_cache_dir = Path(mpeg21_cache_dir) if mpeg21_cache_dir else None
         self.segment_page_kwargs = kwargs
         self.delpher_api_key = delpher_api_key
-        self.alto_cache_dir = alto_cache_dir
 
         self.zoning : list[pd.DataFrame] = []
         self.page_block_filter : dict|None = None
@@ -147,12 +149,17 @@ class RedefineArticle:
         return self.paragraph_texts.copy()
     
 
-    def get_zoning_from_coordinates(self) -> dict:
+    def get_zoning_from_coordinates(self, zones : list[dict] | None = None) -> dict:
         """Group caller-supplied image-coordinate zones by page without DIDL.
 
         The page id is derived from the image filename, e.g.
         'DDD_000022499_003_access.jp2' -> 'ddd:000022499:mpeg21:p003'.
         Block ids are resolved per page by SegmentPage.
+        
+        Args:
+            zones (list[dict] | None): List of coordinate zones, each represented as 
+                a dictionary containing an "image" key with the image filename and
+                "x", "y", "w", "h" keys for the coordinates.
 
         Returns:
             dict[str, list[str]]: Ordered mapping of page identifiers to empty
@@ -163,10 +170,23 @@ class RedefineArticle:
             ValueError: If a zone image filename does not contain a page number
                 followed by ``_access``.
         """
+
+        zones = zones if zones is not None else self.zones
+        if not zones:
+            raise ValueError("No zones provided as argument or in self.zones.")
+
+        zone_keys = {"image", "x", "y", "w", "h"}
+
         self.page_zones = OrderedDict()
-        for zone in self.zones:
-            if not zone or not zone.get("image"):
+        for zone in zones:
+            if not zone:
                 continue
+
+            # Validate zone dictionary
+            missing_keys = zone_keys - set(zone.keys())
+            if missing_keys:
+                raise ValueError(f"Invalid zone dictionary; missing keys: {missing_keys}")
+            
             match = re.search(r"_(\d+)_access", zone["image"])
             if not match:
                 raise ValueError(f"Cannot derive page number from {zone['image']}")
@@ -196,16 +216,7 @@ class RedefineArticle:
         # Extract paper identifier from article identifier
         paper_identifier = self.article_id.rsplit(":", 1)[0]
 
-        # Get metadata for current paper
-        self.url = f"https://resolver.kb.nl/resolve?urn={paper_identifier}"
-
-        headers = {
-            "x-api-key" : self.delpher_api_key
-        }
-        with requests.get(self.url, headers=headers) as response:
-            response.raise_for_status()
-            didl_content = response.content
-            self.didl_tree = etree.fromstring(didl_content)
+        self.didl = self.load_mpeg_metadata(paper_identifier)
 
         # Get didl element (didl:DIDL) with the correct namespaces
         self.didl = self.didl_tree.find(".//{urn:mpeg:mpeg21:2002:02-DIDL-NS}DIDL")
@@ -241,6 +252,54 @@ class RedefineArticle:
             
         return block_data
 
+
+    def load_mpeg_metadata(
+            self,
+            paper_identifier: str,
+    ) -> etree._Element:
+        """Load MPEG metadata for the given paper identifier. Either from cache,
+        or by fetching it from the remote resolver if not cached.
+
+        Args:
+            paper_identifier: The identifier of the paper to load metadata for.
+
+        Returns:
+            etree._Element: The root element of the MPEG metadata XML tree.
+        """
+        use_cache = bool(self.mpeg21_cache_dir)
+
+        if use_cache:
+            filename = paper_identifier.replace(":", "_") + ".xml"
+            cache_file = self.mpeg21_cache_dir / filename
+
+            if cache_file.exists():
+                with open(cache_file, "rb") as f:
+                    didl_content = f.read()
+                self.didl_tree = etree.fromstring(didl_content)
+                return self.didl_tree
+
+        # Get metadata for current paper
+        self.url = f"https://resolver.kb.nl/resolve?urn={paper_identifier}"
+        
+        headers = {}
+        if self.delpher_api_key:
+            headers = {
+                "x-api-key" : self.delpher_api_key
+            }
+
+        with requests.get(self.url, headers=headers) as response:
+            response.raise_for_status()
+            didl_content = response.content
+            self.didl_tree = etree.fromstring(didl_content)
+
+            if use_cache:
+                cache_file.parent.mkdir(parents=True, exist_ok=True)
+                with open(cache_file, "wb") as f:
+                    f.write(didl_content)
+
+        return self.didl_tree
+        
+            
 
     def get_page_paragraphs(
             self,
