@@ -52,9 +52,32 @@ def plot_blocks(
     id_column="id",
     outline_width=2,
     use_color_list=True,
-    return_thumbnail=False,
+    return_thumbnail=True,
     thumbnail_size=(2000, 2000)
 ):
+    """
+    Plot blocks on an image based on the provided DataFrame.
+
+    Args:
+        image: The PIL.Image.Image object to draw on.
+        df: DataFrame containing block information with columns 'hpos', 'vpos', 
+            'width', 'height', and optionally color and id columns.
+        color_column: Column name to use for coloring blocks.
+        add_fill: Whether to fill the blocks with color.
+        add_id: Whether to display the id on the blocks.
+        add_color_id: Whether to display the color id on the blocks.
+        id_column: Column name for the id.
+        outline_width: Width of the block outlines.
+        use_color_list: Whether to use the predefined color list.
+        return_thumbnail: Whether to return a thumbnail of the result. Usefull
+            for faster preview, as original scan images can be large and slow 
+            to render.
+        thumbnail_size: Size of the thumbnail if return_thumbnail is True. Downsizing
+            is done proportionally.
+
+    Returns:
+        PIL.Image.Image: The image with plotted blocks.
+    """
     COLOR_LIST = [
         (255, 0, 0, 255),
         (0, 255, 0, 255),
