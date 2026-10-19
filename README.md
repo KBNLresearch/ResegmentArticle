@@ -4,7 +4,7 @@ Tools for re-segmenting Delpher newspaper articles. Given an article ID, the pac
 article's ALTO OCR pages and:
 
 1. selects the text blocks that belong to the article from:
-    - The Delpher mpeg21 metadata (you need an api-key for recent newspapers)
+    - The Delpher mpeg21 metadata (you need an api-key for copyrighted newspapers younger than 140 years)
     - or from coordinate zones you supply, which can be obtained through the SRU API 
     (use the parameter `x-fields=zones`; this results in an extra field `<zones>` with the 
     zoning in the right format)
@@ -40,7 +40,7 @@ python -m pip install -e ".[test]"
 ```
 
 This makes `segment_article` importable from notebooks and scripts elsewhere. Run the tests with
-`pytest`. Python 3.10 or higher is required. For the example notebook also install `jupyter` and
+`pytest`. Python 3.13 or higher is required. For the example notebook also install `jupyter` and
 `python-dotenv`.
 
 ## Quick start
@@ -86,12 +86,12 @@ expected filenames are the identifier with `:` replaced by `_`, for example
 | Parameter | Default | Meaning |
 | --- | --- | --- |
 | `article_id` | required | Delpher article ID, e.g. `ddd:000022499:mpeg21:a0013`. |
-| `zones` | `None` | List of dicts `{"x", "y", "w", "h", "image"}` (image coordinates, `image` e.g. `DDD_000022499_003_access.jp2`) to select blocks instead of using the Delpher zoning. |
+| `zones` | `None` | List of dicts `{"x", "y", "w", "h", "image"}` (image coordinates, `image` e.g. `DDD_000022499_003_access.jp2`) to select blocks instead of extracting the zoning blocks from the issue mpeg21-metadata file. |
 | `keywords` | `None` | If given, only articles containing a keyword are returned (plus up to `max_paragraph_gap` paragraphs between hits, assuming the article splits were too agressive, and these articles probably form one single article). |
-| `max_paragraph_gap` | `5` | Keyword filtering: paragraphs between two hits that are still kept. Falsy keeps everything between first and last hit. |
+| `max_paragraph_gap` | `5` | Keyword filtering: paragraphs between two hits that are still kept. `None` or `0` keeps everything between first and last hit. |
 | `add_zoning` | `False` | Also build `zoning_df` (new bounding boxes per article part); `zoning_to_dict()` converts it to the `zones` format. |
-| `clean_up` | `True` | Drop helper columns (`block_article_id`, `page_article_id`, `page_idx`) from the output. |
-| `delpher_api_key` | `None` | API key for `resolver.kb.nl`. |
+| `clean_up` | `True` | Drops helper and intermediate columns used internally from the output. |
+| `delpher_api_key` | `None` | API key for accessing metadata files from copyrighted material. |
 | `alto_cache_dir`, `mpeg21_cache_dir` | `None` | Local caches for ALTO and metadata. |
 
 ### `SegmentPage` (forwarded)

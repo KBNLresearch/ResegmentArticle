@@ -7,7 +7,7 @@ name = "resegment-article"
 version = "0.1.0"
 description = "Tools for segmenting and refining articles from ALTO data"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.13"
 dependencies = [
     "lxml",
     "numpy",

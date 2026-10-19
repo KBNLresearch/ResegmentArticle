@@ -1,4 +1,22 @@
 # How it works
+This tool uses the initial article segmentation and text recognition, as found on Delpher, 
+to refine the segmentation for a specific article, and split it into seperate paragraphs.
+The initial segmentation can be found in a so called ALTO-file, which is an XML-file, 
+containing the layout of a specific page. It is structured in text blocks (`TextBlock`), 
+which constist of text lines (`TextLine`), consisting of words (`String`). All those elements 
+have coordinates, which map to the scan image.
+
+Each article consist of one or more of these text blocks. This tool uses those blocks 
+and the coordinates of the lines within in these blocks as a basis for further refinement.
+
+In short:
+- A line which has a significant indentation (compared to the other lines) relative 
+to it's block 'left side', is flagged as a paragraph start;
+- A significant vertical distance between two lines (compared to the distance between 
+other lines), is flagged as the start of a new article.
+
+There are more checks and balances to prevent overly agressive splits, which are 
+described below.
 
 ## Pipeline
 
@@ -17,6 +35,7 @@ flowchart TD
     J --> K[Combine pages, link articles over page breaks]
     K --> L[Optional keyword filter]
 ```
+
 
 ## 1. Selecting blocks (`RedefineArticle.get_article_zoning`)
 
@@ -38,7 +57,7 @@ Each `TextLine` becomes a row with its coordinates (`hpos`, `vpos`, `width`, `he
 metadata (`hyppart1`, `hyppart2`, `hypcontent`, `hyphenated`) is kept. Optionally font and
 paragraph styles (`keep_styles`).
 
-Block flags are computed in ALTO order (`get_text_blocks_df`):
+Block flags are computed in the order as they appear in the ALTO file (`get_text_blocks_df`):
 
 - `same_column`: horizontal overlap with the previous block >= 0.8 (relative to the narrowest
   of the two).
@@ -54,10 +73,10 @@ large compared to the other gaps.
 1. Gap = `vpos` of the line minus the bottom of the previous line (`vpos + height`), per block, or
    across the whole page when `ignore_blocks=True` (negative gaps = jump to the next column, ignored
    in the statistics).
-2. Gaps >= `article_gap_outlier_cutoff` (30 ALTO units) are outliers: they always start an article and
+2. Gaps >= `article_gap_outlier_cutoff` (default 30 pixels) are outliers: they always start an article and
    are left out of the z-score so they do not mask smaller gaps.
-3. A line starts an article if its gap z-score >= `article_split_threshold` **and** the gap is at least a third of the
-   median line height of the group.
+3. A line starts an article if its gap z-score >= `article_split_threshold` **and** the gap is at 
+   least a third of themedian line height of the group.
 4. Without `ignore_blocks`: single-line blocks start an article (`article_single_line_split`);
    the first line of a block that is not in logical flow starts an article; the first line of a
    `same_column` block starts an article.
