@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 import pytest
 from lxml import etree
 
@@ -77,3 +79,20 @@ def test_article_start_uses_line_width_similarity():
     result = page.segment()
 
     assert bool(result.loc[1, "is_article_start"])
+
+
+def test_load_alto_xml_sends_delpher_api_key(monkeypatch):
+    page = SegmentPage(make_alto_page("text", "more text"), delpher_api_key="test-key")
+    alto_xml = etree.tostring(make_alto_page("text", "more text"))
+    request = {}
+
+    def fake_get(url, **kwargs):
+        request["url"] = url
+        request.update(kwargs)
+        return SimpleNamespace(content=alto_xml, raise_for_status=lambda: None)
+
+    monkeypatch.setattr("segment_article.segmentation.requests.get", fake_get)
+
+    page.load_alto_xml("https://resolver.kb.nl/alto.xml")
+
+    assert request["headers"] == {"x-api-key": "test-key"}

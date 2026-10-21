@@ -61,7 +61,7 @@ class RedefineArticle:
             xzwh_zoning: Whether :meth:`zoning_to_dict` uses ``x``, ``y``, ``w``,
                 ``h`` coordinate keys by default.
             clean_up: Whether to remove intermediate columns from returned text.
-            delpher_api_key: API key sent when retrieving Delpher metadata.
+            delpher_api_key: API key sent when retrieving Delpher metadata and ALTO XML.
             alto_cache_dir: Optional directory used by ``SegmentPage`` for ALTO
                 XML caching, or pre-downloaded ALTO XML files.
             mpeg21_cache_dir: Optional directory used for MPEG21 XML caching, or
@@ -345,6 +345,7 @@ class RedefineArticle:
                 zone_filter=self.page_zones.get(page_id),
                 clean_up=self.clean_up,
                 alto_cache_dir=self.alto_cache_dir,
+                delpher_api_key=self.delpher_api_key,
                 **self.segment_page_kwargs
             )
             lines_df = self._segment_page.segment()

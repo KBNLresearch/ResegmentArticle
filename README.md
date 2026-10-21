@@ -4,7 +4,7 @@ Tools for re-segmenting Delpher newspaper articles. Given an article ID, the pac
 article's ALTO OCR pages and:
 
 1. selects the text blocks that belong to the article from:
-    - The Delpher mpeg21 metadata (you need an api-key for copyrighted newspapers younger than 140 years)
+    - The issues mpeg21 metadata (you need an api-key for copyrighted newspapers younger than 140 years)
     - or from coordinate zones you supply, which can be obtained through the SRU API 
     (use the parameter `x-fields=zones`; this results in an extra field `<zones>` with the 
     zoning in the right format)
@@ -51,11 +51,7 @@ from segment_article import RedefineArticle
 
 ra = RedefineArticle(
     article_id="ddd:000022499:mpeg21:a0013",
-    delpher_api_key=os.getenv("DELPHER_API_KEY"),
-    alto_cache_dir="alto_cache",      # optional, avoids repeated downloads
-    mpeg21_cache_dir="mpeg21_cache",  # optional, caches the paper metadata
-    ignore_blocks=True,               # SegmentPage option, see below
-    article_split_threshold=1.3,      # SegmentPage option, see below
+    delpher_api_key=os.getenv("DELPHER_API_KEY"), # Can be None for non copyrighted issues
 )
 
 paragraphs = ra.process_article()   # DataFrame, one row per paragraph
@@ -63,8 +59,10 @@ print(ra.paragraphs_to_text(paragraphs))
 ```
 
 The ALTO pages and the metadata (MPEG21/DIDL) are fetched from `https://resolver.kb.nl`, which
-requires a Delpher API key. Put it in a `.env` file as `DELPHER_API_KEY=...` or pass it directly.
-Files already in `alto_cache_dir` / `mpeg21_cache_dir` are used without network access. The
+requires a Delpher API key for copyright protected newspaper issues. The `delpher_api_key` 
+is sent with both metadata and ALTO requests.
+If `alto_cache_dir` / `mpeg21_cache_dir` are given, these directories are checked, 
+before downloading files. Downloaded files will be stored here as well.
 expected filenames are the identifier with `:` replaced by `_`, for example
 `ddd_000022389_mpeg21_p002_alto.xml` and `ddd_000022499_mpeg21.xml`.
 
@@ -91,7 +89,7 @@ expected filenames are the identifier with `:` replaced by `_`, for example
 | `max_paragraph_gap` | `5` | Keyword filtering: paragraphs between two hits that are still kept. `None` or `0` keeps everything between first and last hit. |
 | `add_zoning` | `False` | Also build `zoning_df` (new bounding boxes per article part); `zoning_to_dict()` converts it to the `zones` format. |
 | `clean_up` | `True` | Drops helper and intermediate columns used internally from the output. |
-| `delpher_api_key` | `None` | API key for accessing metadata files from copyrighted material. |
+| `delpher_api_key` | `None` | API key sent when accessing metadata and ALTO files, including copyrighted material. |
 | `alto_cache_dir`, `mpeg21_cache_dir` | `None` | Local caches for ALTO and metadata. |
 
 ### `SegmentPage` (forwarded)
@@ -100,7 +98,7 @@ expected filenames are the identifier with `:` replaced by `_`, for example
 | --- | --- | --- |
 | `article_split_threshold` | `1.7` | **Most important parameter.** Z-score of the vertical gap between two lines needed to start a new article. Lower = more splits, higher = fewer. Use higher values for modern newspapers, and expect false splits. |
 | `ignore_blocks` | `True` | Segment articles on line spacing across the whole page, instead of per-block. If set to False, at least each block (in the same column) is treated as an hard article split, before finding other splits. |
-| `article_gap_outlier_cutoff` | `30` | Vertical gaps (ALTO units) at or above this always start a new article and are excluded from the z-score. |
+| `article_gap_outlier_cutoff` | `30` | Vertical gaps (ALTO units/pixels) at or above this always start a new article and are excluded from the z-score. |
 | `article_segmentation` / `paragraph_segmentation` | `True` | Switch either step off (a single article / paragraph id is assigned). |
 | `article_single_line_split` | `True` | A block with one line is its own article (not applied with `ignore_blocks`). |
 | `merge_single_line_article_to_next` | `True` | A one-line article (usually a header) is merged with the next article. |
@@ -108,6 +106,7 @@ expected filenames are the identifier with `:` replaced by `_`, for example
 | `paragraph_split_threshold_r` | `0.02` | Minimum indentation as a fraction of block width. Both `_z` and `_r` must be met. |
 | `paragraph_single_line_split` | `True` | A block with one line is its own paragraph. |
 | `keep_styles` | `True` | Keep font/paragraph style columns. Set to `False` for speed and memory. |
+| `delpher_api_key` | `None` | Optional API key sent when fetching ALTO XML directly. |
 
 ## Output
 

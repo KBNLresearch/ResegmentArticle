@@ -57,6 +57,7 @@ class SegmentPage:
             keep_styles: bool = True,
             clean_up: bool = True,
             alto_cache_dir: str | Path | None=None,
+            delpher_api_key: str | None = None,
         ) -> None:
         """Configure segmentation and load the ALTO XML source.
 
@@ -97,6 +98,7 @@ class SegmentPage:
                 However, this causes overhead in terms of memory and processing time.
             clean_up: Whether to apply cleanup steps during segmentation.
             alto_cache_dir: Directory path to store or retrieve cached ALTO XML files. 
+            delpher_api_key: Optional API key sent when fetching ALTO XML.
 
         Raises:
             ValueError: If the source is not a supported path, page identifier,
@@ -121,6 +123,7 @@ class SegmentPage:
         self.keep_styles = keep_styles
         self.clean_up = clean_up
         self.alto_cache_dir = Path(alto_cache_dir) if alto_cache_dir is not None else None
+        self.delpher_api_key = delpher_api_key
 
         self.alto_xml_tree = self.load_alto_xml(alto_xml_tree)
         self.nsmap = self.alto_xml_tree.nsmap
@@ -576,20 +579,30 @@ class SegmentPage:
         if not isinstance(alto_xml_path, str):
             raise ValueError(f"Invalid ALTO XML path or URL: {alto_xml_path}")
 
-        if re.match(ID_PATTERN, alto_xml_path):
-            alto_url = f"https://resolver.kb.nl/resolve?urn={alto_xml_path}:alto"
+        alto_id = None
+        if id_match := re.match(ID_PATTERN, alto_xml_path):
+            alto_id = id_match.group(0) + ":alto"
+            alto_url = f"https://resolver.kb.nl/resolve?urn={alto_id}"
         elif validators.url(alto_xml_path):
             alto_url = alto_xml_path
         else:
             raise ValueError(f"Invalid ALTO XML path or URL: {alto_xml_path}")
 
         if use_cache and self.alto_cache_dir:
-            alto_id = alto_url.split("urn=")[-1].replace(":", "_") + ".xml"
+            if not alto_id:
+                alto_id = alto_url.split("urn=")[-1]
+            alto_id = alto_id.replace(":", "_") + ".xml"
             alto_cache_path = Path(self.alto_cache_dir) / alto_id
             if alto_cache_path.is_file():
                 return etree.fromstring(alto_cache_path.read_bytes())
 
-        response = requests.get(alto_url)
+        if self.delpher_api_key:
+            response = requests.get(
+                alto_url,
+                headers={"x-api-key": self.delpher_api_key},
+            )
+        else:
+            response = requests.get(alto_url)
         response.raise_for_status()
         alto_xml_tree = etree.fromstring(response.content)
 

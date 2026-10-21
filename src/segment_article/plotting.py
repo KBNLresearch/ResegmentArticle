@@ -105,11 +105,11 @@ def plot_blocks(
     if add_id:
         # Shorten the id column name, by extracting the capital letters and numbers from the id string
         df[id_column] = df[id_column].astype(str).str.replace(r'[a-z]+', '', regex=True)
-    if add_color_id:
+    if color_column and add_color_id:
         # Shorten the color column name, by extracting the capital letters and numbers from the id string
         df[color_column] = df[color_column].astype(str).str.replace(r'[a-z]+', '', regex=True)
     
-    if color_column is not None and color_column in df.columns:
+    if color_column and color_column in df.columns:
         values = df[color_column].dropna().astype(str).unique()
         if use_color_list:
             color_map = {value: COLOR_LIST[i % len(COLOR_LIST)] for i, value in enumerate(values)}
