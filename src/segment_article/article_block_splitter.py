@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 import shapely
-from shapely import ops
+from shapely import ops, box, MultiPolygon
 
 class ArticleBlockSplitter:
     """Split image regions into smaller text blocks using horizontal rules.
@@ -33,11 +33,17 @@ class ArticleBlockSplitter:
     def __init__(
         self,
         min_line_width_ratio: float = 0.1,
-        max_line_gap: int = 10,
+        max_line_gap: int = 15,
         hough_threshold: int = 40,
         center_tolerance: float = 0.1,
-        word_mask_shrink: float = 0.2,
+        word_mask_shrink: float = 0.1,
+        min_coverage: float = 0.5,
+        merge_gap_x_ratio: float = 0.1,
+        merge_gap_y: int = 5,
     ) -> None:
+        self.min_coverage = min_coverage
+        self.merge_gap_x_ratio = merge_gap_x_ratio
+        self.merge_gap_y = merge_gap_y
         self.min_line_width_ratio = min_line_width_ratio
         self.max_line_gap = max_line_gap
         self.hough_threshold = hough_threshold
@@ -132,15 +138,31 @@ class ArticleBlockSplitter:
             row["original_id"] = original_block_id
             return {"lines_df": df, "blocks_df": row.to_frame().T}
 
+        
         line_polygons = self.to_polygon(lines)
-        grouped_lines = self.group_lines(line_polygons)
+        self._row = row
+        self._line_polygons = line_polygons
+
+        grouped_lines = self.group_lines(
+            line_polygons,
+            gap_x=row["width"] * self.merge_gap_x_ratio,
+            gap_y=self.merge_gap_y,
+        )
+        self._grouped_lines = grouped_lines
+
         final_line_polygons = self.filter_non_centered_lines(
             grouped_lines,
             block_row=row,
             tolerance=self.center_tolerance,
+            min_coverage=self.min_coverage,
         )
+        self._final_line_polygons = final_line_polygons
+
         alto_lines = self.polygon_to_alto_coords(final_line_polygons)
+        self._alto_lines = alto_lines
+
         split_textblocks_df = self.split_block_by_lines(row, alto_lines)
+        self._split_textblocks_df = split_textblocks_df
 
         block_lines_new = self.assign_lines_to_new_blocks(
             df.loc[line_mask],
@@ -191,12 +213,12 @@ class ArticleBlockSplitter:
             img,
             block_row=None,
             min_line_width_ratio=0.1,
-            max_line_gap=10,
+            max_line_gap=15,
             hough_threshold=40,
             return_image=False,
             print_debug=False,
             words_df=None,
-            word_mask_shrink=0.2,
+            word_mask_shrink=0.1,
         ):
         """
         Detect horizontal lines in a given block of an image using OpenCV's Hough Line Transform.
@@ -324,31 +346,83 @@ class ArticleBlockSplitter:
 
 
     @staticmethod
-    def group_lines(line_polygons):
+    def group_lines(line_polygons, gap_x=0, gap_y=0):
         """
         Group overlapping line polygons into merged polygons.
 
         Args:
             line_polygons (list of shapely.geometry.Polygon): A list of line polygons.
+            gap_x (float): Horizontal distance within which polygons are merged.
+            gap_y (float): Vertical distance within which polygons are merged.
 
         Returns:
             list of shapely.geometry.Polygon: A list of merged polygons representing
                 grouped lines.
         """
+        if line_polygons and isinstance(line_polygons[0], tuple):
+            line_polygons = ArticleBlockSplitter.to_polygon(line_polygons)
+
+        boxes = [p.bounds for p in line_polygons]
+        merged = []
+        while boxes:
+            minx, miny, maxx, maxy = boxes.pop(0)
+            changed = True
+            while changed:
+                changed = False
+                for b in boxes[:]:
+                    if (b[0] <= maxx + gap_x and b[2] >= minx - gap_x and
+                            b[1] <= maxy + gap_y and b[3] >= miny - gap_y):
+                        minx, miny = min(minx, b[0]), min(miny, b[1])
+                        maxx, maxy = max(maxx, b[2]), max(maxy, b[3])
+                        boxes.remove(b)
+                        changed = True
+            merged.append(shapely.geometry.box(minx, miny, maxx, maxy))
+        return merged
+
+
+    @staticmethod
+    def OLD_group_lines(line_polygons, gap_x=0, gap_y=0):
+        """
+        Group overlapping line polygons into merged polygons.
+
+        Args:
+            line_polygons (list of shapely.geometry.Polygon): A list of line polygons.
+            gap_x (float): Horizontal distance within which polygons are merged.
+            gap_y (float): Vertical distance within which polygons are merged.
+
+        Returns:
+            list of shapely.geometry.Polygon: A list of merged polygons representing
+                grouped lines.
+        """
+        # Check if input list has polygons, or coordinates
+        if line_polygons and isinstance(line_polygons[0], tuple):
+            line_polygons = ArticleBlockSplitter.to_polygon(line_polygons)
 
         # Copy line_polygons, so we don't modify the original list
         line_polygons = line_polygons.copy()
+
+        def expanded(poly):
+            minx, miny, maxx, maxy = poly.bounds
+            return shapely.geometry.box(minx - gap_x, miny - gap_y, maxx + gap_x, maxy + gap_y)
 
         merged = []
         while line_polygons:
             current = line_polygons.pop(0)
             overlaps = [current]
-            for other in line_polygons[:]:
-                if current.intersects(other):
-                    overlaps.append(other)
-                    line_polygons.remove(other)
-            # Merge all overlapping lines into a single polygon
+            # Transitive merge: the group grows, so re-check until stable
+            changed = True
+            while changed:
+                changed = False
+                group_box = expanded(ops.unary_union(overlaps))
+                for other in line_polygons[:]:
+                    if group_box.intersects(other):
+                        overlaps.append(other)
+                        line_polygons.remove(other)
+                        changed = True
+            # Merged and convert to Polygon
             merged_polygon = ops.unary_union(overlaps)
+            if isinstance(merged_polygon, MultiPolygon):
+                merged_polygon = box(*merged_polygon.bounds)
             merged.append(merged_polygon)
         return merged
 
@@ -423,25 +497,32 @@ class ArticleBlockSplitter:
         return new_blocks_df
 
     @staticmethod
-    def filter_non_centered_lines(lines, block_row, tolerance=0.1):
+    def filter_non_centered_lines(lines, block_row, tolerance=0.1, min_coverage=0.5):
         """
-        Filter out lines that are not centered within the block's width. The centroid
-        of a line should be within a certain tolerance of the block's center.
+        Filter out lines that are neither centered within the block's width nor
+        spanning at least ``min_coverage`` of it. The centroid of a line should be
+        within a certain tolerance of the block's center.
 
         Args:
             lines (list of shapely.geometry.Polygon): A list of line polygons.
             block_row (pd.Series): A row from the DataFrame representing the original block.
             tolerance (float): The tolerance for determining if a line is centered.
-                A value of 0.1 means the line's centroid must be within 10% of the block's width from the center.
+                A value of 0.1 means the line's centroid must be within 10% of the block's width 
+                from the center.
+            min_coverage (float): The minimum fraction of the block's width that a line must
+                cover to be considered valid.
 
         Returns:
-            list of shapely.geometry.Polygon: A filtered list of line polygons that are centered within the block.
+            list of shapely.geometry.Polygon: A filtered list of line polygons that are centered
+                within the block or cover at least the minimum required fraction of the block's width.
         """
         block_center_x = block_row['hpos'] + block_row['width'] / 2
         filtered_lines = []
         for line in lines:
-            line_centroid_x = line.centroid.x
-            if abs(line_centroid_x - block_center_x) <= tolerance * block_row['width']:
+            minx, _, maxx, _ = line.bounds
+            covers = (maxx - minx) >= min_coverage * block_row['width']
+            centered = abs(line.centroid.x - block_center_x) <= tolerance * block_row['width']
+            if covers or centered:
                 filtered_lines.append(line)
         return filtered_lines
 
