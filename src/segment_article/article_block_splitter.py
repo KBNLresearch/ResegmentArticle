@@ -17,12 +17,22 @@ from shapely import ops
 #     )
 
 def convert_image_to_array(img: Image.Image|np.ndarray) -> np.ndarray:
+    """Convert an PIL image to a numpy array. If the input is already a numpy 
+    array, it is returned as is.
+
+    Args:
+        img (PIL.Image or np.ndarray): The input image.
+
+    Returns:
+        np.ndarray: The converted image as a numpy array.
+    """
 
     if isinstance(img, np.ndarray):
         return img
     if isinstance(img, Image.Image):
         return np.ascontiguousarray(np.array(img.convert("L"), dtype=np.uint8))
     raise ValueError("Unsupported image type")
+
 
 def split_multiple_blocks_and_assign_lines(
         lines_df: pd.DataFrame,
