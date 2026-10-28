@@ -36,19 +36,25 @@ class ArticleBlockSplitter:
         max_line_gap: int = 10,
         hough_threshold: int = 40,
         center_tolerance: float = 0.1,
+        word_mask_shrink: float = 0.2,
     ) -> None:
         self.min_line_width_ratio = min_line_width_ratio
         self.max_line_gap = max_line_gap
         self.hough_threshold = hough_threshold
         self.center_tolerance = center_tolerance
+        self.word_mask_shrink = word_mask_shrink
 
     def split_blocks(
         self,
         lines_df: pd.DataFrame,
         blocks_df: pd.DataFrame,
         img: Image.Image | np.ndarray,
+        words_df: pd.DataFrame | None = None,
     ) -> dict[str, pd.DataFrame]:
         """Split multiple blocks and update their associated line IDs.
+
+        If ``words_df`` (hpos, vpos, width, height) is given, word boxes are masked
+        out before line detection so dense lettering is not detected as a rule.
 
         The input line dataframe is copied. The returned dictionary contains
         the updated ``lines_df`` and the resulting ``blocks_df``.
@@ -63,6 +69,7 @@ class ArticleBlockSplitter:
                     df=updated_lines_df,
                     row=block_row,
                     img=image_array,
+                    words_df=words_df,
                 )
             except Exception as error:
                 print(f"Error splitting block '{block_row['id']}': \n{error}")
@@ -80,6 +87,7 @@ class ArticleBlockSplitter:
         df: pd.DataFrame,
         row: pd.Series | dict | pd.DataFrame,
         img: Image.Image | np.ndarray,
+        words_df: pd.DataFrame | None = None,
     ) -> dict[str, pd.DataFrame]:
         """Split one block and assign its lines to the resulting block IDs.
 
@@ -95,7 +103,9 @@ class ArticleBlockSplitter:
             if len(row) == 1:
                 row = row.iloc[0]
             else:
-                return self.split_blocks(lines_df=df, blocks_df=row, img=image_array)
+                return self.split_blocks(
+                    lines_df=df, blocks_df=row, img=image_array, words_df=words_df
+                )
 
         original_block_id = row["id"]
         line_mask = df["block_id"] == original_block_id
@@ -113,6 +123,8 @@ class ArticleBlockSplitter:
             max_line_gap=self.max_line_gap,
             hough_threshold=self.hough_threshold,
             return_image=False,
+            words_df=words_df,
+            word_mask_shrink=self.word_mask_shrink,
         )
 
         if not lines:
@@ -141,6 +153,40 @@ class ArticleBlockSplitter:
 
 
     @staticmethod
+    def mask_words(
+        thresh: np.ndarray,
+        words_df: pd.DataFrame,
+        offset_x: int = 0,
+        offset_y: int = 0,
+        shrink: float = 0.2,
+        max_aspect: float = 15.0,
+    ) -> np.ndarray:
+        """Zero out word boxes in a binarised crop (in place).
+
+        Boxes are shrunk vertically by ``shrink`` (fraction of height, split over
+        top and bottom) so a rule next to a word is not clipped. Very flat boxes
+        are skipped, as OCR may have read a rule as a word.
+        """
+        h, w = thresh.shape[:2]
+        x1 = words_df["hpos"].to_numpy() - offset_x
+        y1 = words_df["vpos"].to_numpy() - offset_y
+        bw = words_df["width"].to_numpy()
+        bh = words_df["height"].to_numpy()
+
+        inside = (x1 + bw > 0) & (x1 < w) & (y1 + bh > 0) & (y1 < h) & (bh > 0)
+        inside &= (bw / np.maximum(bh, 1)) <= max_aspect
+
+        for x, y, ww, hh in zip(x1[inside], y1[inside], bw[inside], bh[inside]):
+            pad = int(hh * shrink / 2)
+            ya = max(int(y) + pad, 0)
+            yb = min(int(y + hh) - pad, h)
+            xa = max(int(x), 0)
+            xb = min(int(x + ww), w)
+            if yb > ya and xb > xa:
+                thresh[ya:yb, xa:xb] = 0
+        return thresh
+
+    @staticmethod
     def detect_horizontal_lines_in_block(
             img,
             block_row=None,
@@ -149,6 +195,8 @@ class ArticleBlockSplitter:
             hough_threshold=40,
             return_image=False,
             print_debug=False,
+            words_df=None,
+            word_mask_shrink=0.2,
         ):
         """
         Detect horizontal lines in a given block of an image using OpenCV's Hough Line Transform.
@@ -162,6 +210,9 @@ class ArticleBlockSplitter:
             hough_threshold (int): The threshold parameter for the Hough Line Transform.
             return_image (bool): If True, return the intermediate images (gray, thresh, morph) along with the detected lines.
             print_debug (bool): If True, print debug information about the detected lines.
+            words_df (pd.DataFrame): Optional word boxes (hpos, vpos, width, height) that are
+                masked out of the binarised image before line detection.
+            word_mask_shrink (float): Fraction of each word box's height to exclude from masking.
 
         Returns:
             list of tuples: A list of detected horizontal lines, each represented as a tuple (x1, y1, x2, y2).
@@ -196,6 +247,15 @@ class ArticleBlockSplitter:
         # 2. Binariseren (Otsu thresholding om papierruis te negeren)
         # Krantenpapier heeft vaak vlekken; Otsu of Adaptive Threshold helpt enorm.
         _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+        if words_df is not None and len(words_df):
+            ArticleBlockSplitter.mask_words(
+                thresh,
+                words_df,
+                offset_x=int(block['hpos']) if CROPPED else 0,
+                offset_y=int(block['vpos']) if CROPPED else 0,
+                shrink=word_mask_shrink,
+            )
 
         # 3. Optioneel: Morphological kernel om alleen horizontale structuren te versterken
         # Dit filtert kleine spikkels en verticale ruis eruit.
