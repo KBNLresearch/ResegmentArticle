@@ -664,7 +664,7 @@ class SegmentPage:
             self,
             block_filter: Sequence[str] | None = None,
             add_strings: bool = True,
-            keep_styles: bool = True,
+            keep_styles: bool|None = None,
         ) -> pd.DataFrame:
         """Extract text-line attributes and optionally aggregate their strings.
 
@@ -685,6 +685,8 @@ class SegmentPage:
             When strings are present, stores the processed string rows in
             ``_strings_df``.
         """
+        keep_styles = keep_styles if keep_styles is not None else self.keep_styles
+        
         blocks = self.alto_xml_tree.findall(".//TextBlock", namespaces=self.nsmap)
 
         if block_filter:
