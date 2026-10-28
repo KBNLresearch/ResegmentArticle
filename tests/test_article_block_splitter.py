@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 from PIL import Image
 
-from segment_article import ArticleBlockSplitter, article_block_splitter
+from segment_article import ArticleBlockSplitter
 
 
 def make_block(block_id="block"):
@@ -23,9 +23,9 @@ def test_batch_without_detected_lines_copies_lines_and_preserves_blocks(
     monkeypatch, as_pil
 ):
     monkeypatch.setattr(
-        article_block_splitter,
+        ArticleBlockSplitter,
         "detect_horizontal_lines_in_block",
-        lambda **kwargs: [],
+        staticmethod(lambda **kwargs: []),
     )
     lines_df = pd.DataFrame(
         {
@@ -56,9 +56,9 @@ def test_batch_without_detected_lines_copies_lines_and_preserves_blocks(
 
 def test_single_block_split_assigns_lines_and_mutates_input(monkeypatch):
     monkeypatch.setattr(
-        article_block_splitter,
+        ArticleBlockSplitter,
         "detect_horizontal_lines_in_block",
-        lambda **kwargs: [(10, 48, 90, 48)],
+        staticmethod(lambda **kwargs: [(10, 48, 90, 48)]),
     )
     lines_df = pd.DataFrame(
         {
@@ -89,7 +89,7 @@ def test_splitter_passes_instance_detector_settings(monkeypatch):
         detected_options.update(kwargs)
         return []
 
-    monkeypatch.setattr(article_block_splitter, "detect_horizontal_lines_in_block", detect)
+    monkeypatch.setattr(ArticleBlockSplitter, "detect_horizontal_lines_in_block", staticmethod(detect))
     splitter = ArticleBlockSplitter(
         min_line_width_ratio=0.25,
         max_line_gap=7,
@@ -110,9 +110,9 @@ def test_splitter_passes_instance_detector_settings(monkeypatch):
 
 def test_single_block_accepts_dict_row_without_split(monkeypatch):
     monkeypatch.setattr(
-        article_block_splitter,
+        ArticleBlockSplitter,
         "detect_horizontal_lines_in_block",
-        lambda **kwargs: [],
+        staticmethod(lambda **kwargs: []),
     )
     lines_df = pd.DataFrame({"block_id": ["block"]})
 
@@ -128,9 +128,9 @@ def test_single_block_accepts_dict_row_without_split(monkeypatch):
 
 def test_center_tolerance_controls_candidate_line_filtering(monkeypatch):
     monkeypatch.setattr(
-        article_block_splitter,
+        ArticleBlockSplitter,
         "detect_horizontal_lines_in_block",
-        lambda **kwargs: [(25, 48, 45, 48)],
+        staticmethod(lambda **kwargs: [(25, 48, 45, 48)]),
     )
     lines_df = pd.DataFrame({"block_id": ["block"], "vpos": [60]})
 
@@ -158,8 +158,18 @@ def test_line_on_shared_boundary_is_assigned_to_later_block():
         ]
     )
 
-    result = article_block_splitter.assign_lines_to_new_blocks(lines_df, blocks_df)
+    result = ArticleBlockSplitter.assign_lines_to_new_blocks(lines_df, blocks_df)
 
     assert result["block_id"].tolist() == ["block_1", "block_2", "block_2"]
     assert result["original_block_id"].tolist() == ["block"] * 3
     assert lines_df["block_id"].tolist() == ["block"] * 3
+
+
+def test_convert_image_to_array_is_static():
+    image_array = np.zeros((2, 2), dtype=np.uint8)
+    assert ArticleBlockSplitter.convert_image_to_array(image_array) is image_array
+
+    image = Image.fromarray(image_array)
+    np.testing.assert_array_equal(
+        ArticleBlockSplitter.convert_image_to_array(image), image_array
+    )
