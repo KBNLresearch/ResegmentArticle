@@ -72,6 +72,7 @@ expected filenames are the identifier with `:` replaced by `_`, for example
 | --- | --- |
 | `RedefineArticle` | Entry point. Resolves which blocks belong to an article, runs `SegmentPage` for each page, combines the pages (articles continuing across a page break are linked), optionally filters on keywords. |
 | `SegmentPage` | Works on one ALTO page. Extracts lines, detects article and paragraph starts, merges lines into paragraph texts. |
+| `ArticleBlockSplitter` | Splits blocks at detected horizontal rules in a page image and assigns lines to the resulting blocks. |
 | `plot_blocks`, `fetch_image` | Visual checks: draw lines/blocks coloured by article or paragraph on the page scan. |
 
 ## Important parameters

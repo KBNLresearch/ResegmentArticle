@@ -1,20 +1,9 @@
 import cv2
 import numpy as np
 import pandas as pd
-import shapely
 from PIL import Image
+import shapely
 from shapely import ops
-
-# def visual_split(
-#         lines_df: pd.DataFrame,
-#         blocks_df: pd.DataFrame, 
-#         img: Image.Image|np.ndarray|None=None
-# ):
-#     return split_multiple_blocks_and_assign_lines(
-#         lines_df=lines_df,
-#         blocks_df=blocks_df,
-#         img=img
-#     )
 
 def convert_image_to_array(img: Image.Image|np.ndarray) -> np.ndarray:
     """Convert an PIL image to a numpy array. If the input is already a numpy 
@@ -34,99 +23,115 @@ def convert_image_to_array(img: Image.Image|np.ndarray) -> np.ndarray:
     raise ValueError("Unsupported image type")
 
 
-def split_multiple_blocks_and_assign_lines(
+class ArticleBlockSplitter:
+    """Split image regions into smaller text blocks using horizontal rules.
+
+    Detector settings are stored on the instance so the same configuration can
+    be applied to multiple pages.
+    """
+
+    def __init__(
+        self,
+        min_line_width_ratio: float = 0.1,
+        max_line_gap: int = 10,
+        hough_threshold: int = 40,
+        center_tolerance: float = 0.1,
+    ) -> None:
+        self.min_line_width_ratio = min_line_width_ratio
+        self.max_line_gap = max_line_gap
+        self.hough_threshold = hough_threshold
+        self.center_tolerance = center_tolerance
+
+    def split_blocks(
+        self,
         lines_df: pd.DataFrame,
-        blocks_df: pd.DataFrame, 
-        img: Image.Image|np.ndarray
-    ) -> dict:
-    """
-    Split multiple text blocks into smaller blocks based on detected horizontal lines
-    and assign lines to the new block ids in the original df.
+        blocks_df: pd.DataFrame,
+        img: Image.Image | np.ndarray,
+    ) -> dict[str, pd.DataFrame]:
+        """Split multiple blocks and update their associated line IDs.
 
-    Args:
-        lines_df (pd.DataFrame): The DataFrame containing all lines.
-        blocks_df (pd.DataFrame): A DataFrame containing the blocks' information.
-        img (PIL.Image or np.ndarray): The input image containing the blocks.
+        The input line dataframe is copied. The returned dictionary contains
+        the updated ``lines_df`` and the resulting ``blocks_df``.
+        """
+        updated_lines_df = lines_df.copy()
+        all_split_blocks = []
+        image_array = convert_image_to_array(img)
 
-    Returns:
-        dict: A dictionary with the updated DataFrame and the splitted text block DataFrame.
-    """
-    updated_lines_df = lines_df.copy()
-    all_splitted_blocks = []
+        for _, block_row in blocks_df.iterrows():
+            try:
+                result = self.split_block(
+                    df=updated_lines_df,
+                    row=block_row,
+                    img=image_array,
+                )
+            except Exception as error:
+                print(f"Error splitting block '{block_row['id']}': \n{error}")
+                print(block_row)
+                raise
 
-    img = convert_image_to_array(img)
+            updated_lines_df = result["lines_df"]
+            all_split_blocks.append(result["blocks_df"])
 
-    for _, block_row in blocks_df.iterrows():
-        try:
-            result = split_block_and_assign_lines(df=updated_lines_df, row=block_row, img=img)
-        except Exception as e:
-            print(f"Error splitting block '{block_row['id']}': \n{e}")
+        split_blocks_df = pd.concat(all_split_blocks, ignore_index=True)
+        return {"lines_df": updated_lines_df, "blocks_df": split_blocks_df}
 
-            print(block_row)
-            raise e
-
-        updated_lines_df = result["lines_df"]
-        splitted_blocks_df = result["blocks_df"]
-        all_splitted_blocks.append(splitted_blocks_df)
-
-    # Concatenate all splitted blocks into a single DataFrame
-    all_splitted_blocks_df = pd.concat(all_splitted_blocks, ignore_index=True)
-
-    return {"lines_df": updated_lines_df, "blocks_df": all_splitted_blocks_df}
-
-
-def split_block_and_assign_lines(
+    def split_block(
+        self,
         df: pd.DataFrame,
-        row: pd.Series|dict|pd.DataFrame, 
-        img: Image.Image|np.ndarray, 
-    ):
-    """
-    Split a text block into smaller blocks based on detected horizontal lines
-    and assign lines to the new block ids in the original df, and update the
-    input block row with the new block ids. 
+        row: pd.Series | dict | pd.DataFrame,
+        img: Image.Image | np.ndarray,
+    ) -> dict[str, pd.DataFrame]:
+        """Split one block and assign its lines to the resulting block IDs.
 
-    Args:
-        df (pd.DataFrame): The DataFrame containing all lines.
-        row (pd.Series): A series containing the block's information.
-        img (PIL.Image or np.ndarray): The input image containing the block.
+        A multirow dataframe is treated as a request to split multiple blocks.
+        This method mutates ``df`` and returns it in the ``lines_df`` field.
+        """
+        image_array = convert_image_to_array(img)
 
-    Returns:
-        dict: A dictionary with the updated DataFrame and the splitted text block DataFrame.
-    """
+        if isinstance(row, dict):
+            row = pd.Series(row)
 
-    img = convert_image_to_array(img)
-    
-    if isinstance(row, pd.DataFrame):
-        if len(row) == 1:
-            row = row.iloc[0]
-        else:
-            return split_multiple_blocks_and_assign_lines(lines_df=df, blocks_df=row, img=img)
-    
-    lines = detect_horizontal_lines_in_block(img=img, block_row=row, return_image=False)
+        if isinstance(row, pd.DataFrame):
+            if len(row) == 1:
+                row = row.iloc[0]
+            else:
+                return self.split_blocks(lines_df=df, blocks_df=row, img=image_array)
 
-    original_block_id = row['id']
-    line_mask = (df['block_id'] == original_block_id)
+        lines = detect_horizontal_lines_in_block(
+            img=image_array,
+            block_row=row,
+            min_line_width_ratio=self.min_line_width_ratio,
+            max_line_gap=self.max_line_gap,
+            hough_threshold=self.hough_threshold,
+            return_image=False,
+        )
 
-    if not lines:
-        df.loc[line_mask, 'original_block_id'] = original_block_id
-        row['original_id'] = original_block_id
-        return {"lines_df": df, "blocks_df": row.to_frame().T}
-    
-    line_polygons = to_polygon(lines)
-    final_line_polygons = group_lines(line_polygons)
-    final_line_polygons = filter_non_centered_lines(final_line_polygons, block_row=row, tolerance=0.1)
+        original_block_id = row["id"]
+        line_mask = df["block_id"] == original_block_id
 
-    alto_lines = polygon_to_alto_coords(final_line_polygons)
-    splitted_textblocks_df = split_block_by_lines(row, alto_lines)
+        if not lines:
+            df.loc[line_mask, "original_block_id"] = original_block_id
+            row["original_id"] = original_block_id
+            return {"lines_df": df, "blocks_df": row.to_frame().T}
 
+        line_polygons = to_polygon(lines)
+        final_line_polygons = group_lines(line_polygons)
+        final_line_polygons = filter_non_centered_lines(
+            final_line_polygons,
+            block_row=row,
+            tolerance=self.center_tolerance,
+        )
+        alto_lines = polygon_to_alto_coords(final_line_polygons)
+        split_textblocks_df = split_block_by_lines(row, alto_lines)
 
-    # block_lines = df.query(f"block_id == '{block_id}'")
-    block_lines_new = assign_lines_to_new_blocks(df.loc[line_mask], splitted_textblocks_df)
+        block_lines_new = assign_lines_to_new_blocks(
+            df.loc[line_mask],
+            split_textblocks_df,
+        )
+        df.loc[line_mask, "original_block_id"] = original_block_id
+        df.loc[line_mask, "block_id"] = block_lines_new["block_id"].values
 
-    df.loc[line_mask, 'original_block_id'] = original_block_id
-    df.loc[line_mask, 'block_id'] = block_lines_new['block_id'].values
-
-    return {"lines_df" : df, "blocks_df" : splitted_textblocks_df}
+        return {"lines_df": df, "blocks_df": split_textblocks_df}
 
 
 
