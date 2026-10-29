@@ -165,6 +165,56 @@ def test_line_on_shared_boundary_is_assigned_to_later_block():
     assert lines_df["block_id"].tolist() == ["block"] * 3
 
 
+def test_remove_empty_blocks_and_renumber_preserves_initial_ids():
+    lines_df = pd.DataFrame(
+        {
+            "block_id": ["block_1", "block_3"],
+            "original_block_id": ["block", "block"],
+        }
+    )
+    blocks_df = pd.DataFrame(
+        [
+            {"id": "block_1", "vpos": 0},
+            {"id": "block_2", "vpos": 30},
+            {"id": "block_3", "vpos": 60},
+        ]
+    )
+
+    updated_lines, updated_blocks = ArticleBlockSplitter.remove_empty_blocks_and_renumber(
+        lines_df,
+        blocks_df,
+        "block",
+    )
+
+    assert updated_blocks["id"].tolist() == ["block_1", "block_2"]
+    assert updated_blocks["initial_split_id"].tolist() == ["block_1", "block_3"]
+    assert updated_lines["block_id"].tolist() == ["block_1", "block_2"]
+
+
+def test_expand_blocks_to_contain_lines_vertically():
+    lines_df = pd.DataFrame(
+        {
+            "block_id": ["expand", "expand", "unchanged"],
+            "vpos": [8, 17, 32],
+            "height": [4, 7, 5],
+        }
+    )
+    blocks_df = pd.DataFrame(
+        [
+            {"id": "expand", "vpos": 10, "height": 10},
+            {"id": "unchanged", "vpos": 30, "height": 20},
+        ]
+    )
+
+    result = ArticleBlockSplitter.expand_blocks_to_contain_lines_vertically(
+        lines_df,
+        blocks_df,
+    )
+
+    assert result[["vpos", "height"]].values.tolist() == [[8, 16], [30, 20]]
+    assert blocks_df[["vpos", "height"]].values.tolist() == [[10, 10], [30, 20]]
+
+
 def test_convert_image_to_array_is_static():
     image_array = np.zeros((2, 2), dtype=np.uint8)
     assert ArticleBlockSplitter.convert_image_to_array(image_array) is image_array

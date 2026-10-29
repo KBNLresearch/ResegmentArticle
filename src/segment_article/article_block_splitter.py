@@ -162,12 +162,28 @@ class ArticleBlockSplitter:
         self._alto_lines = alto_lines
 
         split_textblocks_df = self.split_block_by_lines(row, alto_lines)
-        self._split_textblocks_df = split_textblocks_df
 
         block_lines_new = self.assign_lines_to_new_blocks(
             df.loc[line_mask],
             split_textblocks_df,
         )
+
+        # Postprocessing:
+        # Remove blocks without any assigned lines and renumber the remaining blocks
+        block_lines_new, split_textblocks_df = self.remove_empty_blocks_and_renumber(
+            lines_df=block_lines_new,
+            blocks_df=split_textblocks_df,
+            original_block_id=original_block_id,
+            return_updated_blocks_df=True
+        )
+        # Expand blocks vertically to ensure they contain all assigned lines
+        split_textblocks_df = self.expand_blocks_to_contain_lines_vertically(
+            lines_df=block_lines_new,
+            blocks_df=split_textblocks_df,
+        )
+        self._split_textblocks_df = split_textblocks_df
+
+        # Update the original block ID and block ID in the original DataFrame
         df.loc[line_mask, "original_block_id"] = original_block_id
         df.loc[line_mask, "block_id"] = block_lines_new["block_id"].values
 
@@ -495,6 +511,65 @@ class ArticleBlockSplitter:
 
 
         return new_blocks_df
+
+    @staticmethod
+    def remove_empty_blocks_and_renumber(
+        lines_df: pd.DataFrame,
+        blocks_df: pd.DataFrame,
+        original_block_id: str,
+        return_updated_blocks_df: bool = False,
+        
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
+        """Remove blocks without assigned lines and renumber the remaining blocks.
+
+        The IDs generated before filtering are retained in ``initial_split_id``.
+        """
+        lines_df = lines_df.copy()
+        blocks_df = blocks_df.copy()
+        blocks_df["initial_split_id"] = blocks_df["id"]
+
+        occupied_ids = lines_df["block_id"].dropna().unique()
+        blocks_df = blocks_df[blocks_df["id"].isin(occupied_ids)]
+        # blocks_df = blocks_df.sort_values("vpos").reset_index(drop=True)
+
+        id_map = {
+            initial_id: f"{original_block_id}_{number}"
+            for number, initial_id in enumerate(blocks_df["initial_split_id"], start=1)
+        }
+        blocks_df["id"] = blocks_df["initial_split_id"].map(id_map)
+        lines_df["block_id"] = lines_df["block_id"].map(id_map)
+
+        if return_updated_blocks_df:
+            return lines_df, blocks_df
+        return lines_df, None
+
+    @staticmethod
+    def expand_blocks_to_contain_lines_vertically(
+        lines_df: pd.DataFrame,
+        blocks_df: pd.DataFrame,
+    ) -> pd.DataFrame:
+        """Expand block bounds as needed to contain their assigned lines vertically."""
+        blocks_df = blocks_df.copy()
+        if lines_df.empty or blocks_df.empty:
+            return blocks_df
+
+        line_bounds = (
+            lines_df.dropna(subset=["block_id"])
+            .assign(_line_bottom=lambda frame: frame["vpos"] + frame["height"])
+            .groupby("block_id")
+            .agg(line_top=("vpos", "min"), line_bottom=("_line_bottom", "max"))
+        )
+        line_tops = blocks_df["id"].map(line_bounds["line_top"])
+        line_bottoms = blocks_df["id"].map(line_bounds["line_bottom"])
+        has_lines = line_tops.notna() & line_bottoms.notna()
+
+        new_tops = np.minimum(blocks_df.loc[has_lines, "vpos"], line_tops[has_lines])
+        old_bottoms = blocks_df.loc[has_lines, "vpos"] + blocks_df.loc[has_lines, "height"]
+        new_bottoms = np.maximum(old_bottoms, line_bottoms[has_lines])
+
+        blocks_df.loc[has_lines, "vpos"] = new_tops
+        blocks_df.loc[has_lines, "height"] = new_bottoms - new_tops
+        return blocks_df
 
     @staticmethod
     def filter_non_centered_lines(lines, block_row, tolerance=0.1, min_coverage=0.5):
