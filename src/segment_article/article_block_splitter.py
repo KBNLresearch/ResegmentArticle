@@ -167,7 +167,6 @@ class ArticleBlockSplitter:
             df.loc[line_mask],
             split_textblocks_df,
         )
-
         # Postprocessing:
         # Remove blocks without any assigned lines and renumber the remaining blocks
         block_lines_new, split_textblocks_df = self.remove_empty_blocks_and_renumber(
@@ -465,11 +464,11 @@ class ArticleBlockSplitter:
         prev_bottom = block_row['vpos']
 
         base_block = {
-            "original_id": block_row['id'],
             'hpos': block_row['hpos'],
             'width': block_row['width'],
+            "original_id": block_row['id'],
         }
-
+ 
         for idx, line in enumerate(lines_sorted):
             nr = idx + 1
             new_id = f"{block_row['id']}_{nr}"
@@ -509,8 +508,11 @@ class ArticleBlockSplitter:
                 # treated as a single value for all new blocks.
                 new_blocks_df[col] = [value for _ in range(len(new_blocks_df))]
 
+        # Reorder columns to match the input order
+        col_order = block_row.index.tolist()
+        col_order = col_order + [i for i in new_blocks_df.columns if i not in col_order]
 
-        return new_blocks_df
+        return new_blocks_df.filter(col_order)
 
     @staticmethod
     def remove_empty_blocks_and_renumber(
@@ -633,30 +635,48 @@ class ArticleBlockSplitter:
         return alto_coords
 
 
+    # @staticmethod
+    # def assign_lines_to_new_blocks(lines_df, new_blocks_df):
+    #     """
+    #     Assign TextLines to new blocks based on their vertical position.
+
+    #     Args:
+    #         lines_df (pd.DataFrame): DataFrame containing the original TextLines with 'vpos' and 'height'.
+    #         new_blocks_df (pd.DataFrame): DataFrame containing the new blocks with 'vpos' and 'height'.
+
+    #     Returns:
+    #         pd.DataFrame: The original lines_df with an additional column 'new_block_id' indicating the assigned block.
+    #     """
+    #     lines_df = lines_df.copy()
+    #     lines_df['original_block_id'] = lines_df['block_id']
+    #     lines_df['block_id'] = None
+
+    #     for _, block in new_blocks_df.iterrows():
+    #         block_top = block['vpos']
+    #         block_bottom = block['vpos'] + block['height']
+
+    #         # Assign lines that fall within the block's vertical range
+    #         # mask = (lines_df['vpos'] >= block_top) & (lines_df['vpos'] + lines_df['height'] <= block_bottom)
+    #         mask = (lines_df['vpos'] >= block_top) & (lines_df['vpos'] <= block_bottom)
+
+    #         lines_df.loc[mask, 'block_id'] = block['id']
+
+    #     return lines_df
+
     @staticmethod
     def assign_lines_to_new_blocks(lines_df, new_blocks_df):
-        """
-        Assign TextLines to new blocks based on their vertical position.
-
-        Args:
-            lines_df (pd.DataFrame): DataFrame containing the original TextLines with 'vpos' and 'height'.
-            new_blocks_df (pd.DataFrame): DataFrame containing the new blocks with 'vpos' and 'height'.
-
-        Returns:
-            pd.DataFrame: The original lines_df with an additional column 'new_block_id' indicating the assigned block.
-        """
         lines_df = lines_df.copy()
         lines_df['original_block_id'] = lines_df['block_id']
         lines_df['block_id'] = None
 
-        for _, block in new_blocks_df.iterrows():
-            block_top = block['vpos']
-            block_bottom = block['vpos'] + block['height']
+        centers = lines_df['vpos'] + lines_df['height'] / 2
+        tops = new_blocks_df['vpos'].to_numpy()
+        bottoms = tops + new_blocks_df['height'].to_numpy()
 
-            # Assign lines that fall within the block's vertical range
-            # mask = (lines_df['vpos'] >= block_top) & (lines_df['vpos'] + lines_df['height'] <= block_bottom)
-            mask = (lines_df['vpos'] >= block_top) & (lines_df['vpos'] <= block_bottom)
+        # Distance from each line center to each block's vertical range (0 if inside)
+        c = centers.to_numpy()[:, None]
+        dist = np.maximum(np.maximum(tops - c, c - bottoms), 0)
 
-            lines_df.loc[mask, 'block_id'] = block['id']
-
+        nearest = dist.argmin(axis=1)
+        lines_df['block_id'] = new_blocks_df['id'].to_numpy()[nearest]
         return lines_df

@@ -130,11 +130,14 @@ class SegmentPage:
         self.text_styles_df = self.get_text_styles_df() if self.keep_styles else pd.DataFrame()
         self.par_styles_df = self.get_paragraph_styles_df() if self.keep_styles else pd.DataFrame()
 
+        self.text_blocks_df: pd.DataFrame | None = None
+        self.text_blocks_df = self.get_text_blocks_df(block_filter=self.block_filter)
+
         self.zone_filter = list(zone_filter or [])
         if self.zone_filter:
             self.block_filter = self.zones_to_block_ids(self.zone_filter)
 
-        self.text_blocks_df = pd.DataFrame()
+        
 
         self.df: pd.DataFrame | None = None
         self.text_lines_df: pd.DataFrame | None = None
@@ -176,7 +179,8 @@ class SegmentPage:
 
         self.block_filter = self.block_filter if block_filter is None else list(block_filter)
 
-        self.df = self.get_text_lines_df(block_filter=self.block_filter, keep_styles=self.keep_styles)
+        if isinstance(self.df, type(None)):
+            self.df = self.get_text_lines_df(block_filter=self.block_filter, keep_styles=self.keep_styles)
         
         if self.article_segmentation:
             self.df = self.segment_articles(self.df, block_filter=self.block_filter)
@@ -306,7 +310,7 @@ class SegmentPage:
         """
         # Filter the text blocks based on the provided block filter.
         block_filter = self.block_filter if block_filter is None else list(block_filter)
-        self.text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
+        text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
 
         # Group by block (if not ignoring blocks)
         group_column = self.block_id_col
@@ -368,7 +372,7 @@ class SegmentPage:
             # The first line always opens an article.
             df.loc[0, "is_article_start"] = True
         else:
-            text_blocks_df = self.text_blocks_df.set_index("id")
+            text_blocks_df = text_blocks_df.set_index("id")
             logical_flow = df[self.block_id_col].map(text_blocks_df["logical_flow"])
             # First line of a block is considered an article start
             first_line = ~df[self.block_id_col].duplicated(keep="first")
@@ -474,7 +478,7 @@ class SegmentPage:
         """
  
         block_filter = self.block_filter if block_filter is None else list(block_filter)
-        self.text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
+        text_blocks_df = self.get_text_blocks_df(block_filter=block_filter)
 
 
         group_columns = [self.block_id_col]
@@ -517,16 +521,16 @@ class SegmentPage:
         if 'hyppart2' in df.columns:
             df.loc[df['hyppart2'].notna(), "is_paragraph_start"] = False
 
-
         if self.paragraph_single_line_split:
             single_line = grouped[group_columns[0]].transform("size").eq(1)
             df.loc[single_line, "is_paragraph_start"] = True
 
         df = df.assign(_group_order=group_order)
-        df = df.sort_values("_group_order", kind="stable").drop(columns="_group_order")
+        df = df.sort_values("_group_order", kind="stable")\
+            .drop(columns="_group_order")
         df = df.reset_index(drop=True)
 
-        text_blocks = self.text_blocks_df.set_index("id")
+        text_blocks = text_blocks_df.set_index("id")
         same_column = df[self.block_id_col].map(text_blocks["same_column"])
         logical_flow = df[self.block_id_col].map(text_blocks["logical_flow"])
         
@@ -616,6 +620,7 @@ class SegmentPage:
     def get_text_blocks_df(
             self,
             block_filter: Sequence[str] | None = None,
+            force_reload: bool = False,
         ) -> pd.DataFrame:
         """Extract text-block attributes and calculate inter-block flow flags.
 
@@ -629,6 +634,11 @@ class SegmentPage:
                 calculated in XML order before applying the optional filter.
 
         """
+        if not force_reload and isinstance(self.text_blocks_df, pd.DataFrame):
+            if not "logical_flow" in self.text_blocks_df.columns:
+                self.text_blocks_df = self.check_logical_flow_between_blocks(self.text_blocks_df)
+            return self.text_blocks_df
+        
         text_bs = self.alto_xml_tree.findall(".//TextBlock", namespaces=self.nsmap)
         text_bs_df = self.elms_to_df(text_bs)
         text_bs_df = self.check_logical_flow_between_blocks(text_bs_df)
@@ -887,8 +897,17 @@ class SegmentPage:
                 is also included when ``clean_up`` is false.
         
         """
+        
+        new_output_cols = [
+            'same_column', 
+            'starts_right', 
+            'logical_flow'
+        ]
+
+        df = df.copy()\
+            .drop(columns=new_output_cols, errors='ignore')
+
         input_columns = df.columns.tolist()
-        df = df.copy()
 
         left = df['hpos'].to_numpy(dtype=float)
         right = (df['hpos'] + df['width']).to_numpy(dtype=float)
@@ -927,7 +946,7 @@ class SegmentPage:
         df['logical_flow'] = df['same_column'] | df['starts_right']
 
         if clean_up:
-            df = df[input_columns + ['same_column', 'starts_right', 'logical_flow']]
+            df = df[input_columns + new_output_cols]
 
         return df
 
